@@ -56,3 +56,11 @@ section .button-container .active {
   color: var(--primary);
   box-shadow: var(--box-shadow-active);
 }
+
+@media screen and (max-width: 425px) {
+  section .button-container {
+    margin: 10px;
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+}
