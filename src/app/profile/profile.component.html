@@ -1,0 +1,87 @@
+<section>
+  @if (!loading) {
+  <form [formGroup]="profileForm" class="content">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        formControlName="password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+        type="button"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      @if (profileForm.get('password')!.invalid) {
+      <mat-error>
+        @if (profileForm.get('password')!.hasError('required')) {
+        <span>Password is required</span>
+        } @if (profileForm.get('password')!.hasError('minlength')) {
+        <span>Password is too short</span>
+        } @if (profileForm.get('password')!.hasError('maxlength')) {
+        <span>Password is too long</span>
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Confirm</mat-label>
+      <input
+        matInput
+        [type]="hideDuplicate ? 'password' : 'text'"
+        formControlName="passwordConfirmation"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hideDuplicate = !hideDuplicate"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hideDuplicate"
+        type="button"
+      >
+        <mat-icon>{{
+          hideDuplicate ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+      @if (profileForm.get('passwordConfirmation')!.invalid) {
+      <mat-error>
+        @if (profileForm.get('passwordConfirmation')!.hasError('required')) {
+        <span>Password is required</span>
+        } @if (profileForm.get('passwordConfirmation')!.hasError('minlength')) {
+        <span>Password is too short</span>
+        } @if (profileForm.get('passwordConfirmation')!.hasError('maxlength')) {
+        <span>Password is too long</span>
+        } @if
+        (profileForm.get('passwordConfirmation')!.hasError('passwordMismatch'))
+        {
+        <span>Passwords do not match</span>
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+    <div class="button-container">
+      <a (click)="updateProfile()" title="Update profile">
+        <i class="bx bxs-edit-alt"></i>
+        <span class="text">Update</span>
+      </a>
+      <a (click)="openDialog()" title="Delete profile" class="delete">
+        <i class="bx bxs-trash"></i>
+        <span class="text">Delete</span>
+      </a>
+    </div>
+  </form>
+  }
+</section>
+@if (loading) {
+<mat-spinner></mat-spinner>
+}

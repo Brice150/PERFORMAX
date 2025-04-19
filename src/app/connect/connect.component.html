@@ -1,0 +1,27 @@
+<section>
+  <div class="button-container">
+    <a
+      (click)="toggleLoginOrRegister('register')"
+      title="Register"
+      class="left"
+      [ngClass]="isRegistering ? 'active' : 'unactive'"
+    >
+      <h1>Register</h1>
+    </a>
+    <a
+      (click)="toggleLoginOrRegister('login')"
+      title="Login"
+      class="right"
+      [ngClass]="!isRegistering ? 'active' : 'unactive'"
+    >
+      <h1>Login</h1>
+    </a>
+  </div>
+  <div class="content">
+    @if (isRegistering) {
+    <app-register></app-register>
+    } @else {
+    <app-login></app-login>
+    }
+  </div>
+</section>

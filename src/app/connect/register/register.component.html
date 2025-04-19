@@ -1,0 +1,86 @@
+@if (!loading) {
+<form [formGroup]="registerForm">
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" />
+    @if (registerForm.get('email')!.invalid) {
+    <mat-error>
+      @if (registerForm.get('email')!.hasError('required')) {
+      <span>Email is required</span>
+      } @if (registerForm.get('email')!.hasError('email')) {
+      <span>Email is invalid</span>
+      }
+    </mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      formControlName="password"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+      type="button"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+    @if (registerForm.get('password')!.invalid) {
+    <mat-error>
+      @if (registerForm.get('password')!.hasError('required')) {
+      <span>Password is required</span>
+      } @if (registerForm.get('password')!.hasError('minlength')) {
+      <span>Password is too short</span>
+      } @if (registerForm.get('password')!.hasError('maxlength')) {
+      <span>Password is too long</span>
+      }
+    </mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Confirm</mat-label>
+    <input
+      matInput
+      [type]="hideDuplicate ? 'password' : 'text'"
+      formControlName="passwordConfirmation"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hideDuplicate = !hideDuplicate"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hideDuplicate"
+      type="button"
+    >
+      <mat-icon>{{ hideDuplicate ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+    @if (registerForm.get('passwordConfirmation')!.invalid) {
+    <mat-error>
+      @if (registerForm.get('passwordConfirmation')!.hasError('required')) {
+      <span>Password is required</span>
+      } @if (registerForm.get('passwordConfirmation')!.hasError('minlength')) {
+      <span>Password is too short</span>
+      } @if (registerForm.get('passwordConfirmation')!.hasError('maxlength')) {
+      <span>Password is too long</span>
+      } @if
+      (registerForm.get('passwordConfirmation')!.hasError('passwordMismatch')) {
+      <span>Passwords do not match</span>
+      }
+    </mat-error>
+    }
+  </mat-form-field>
+  <div class="button-container">
+    <a title="Register" (click)="register()">
+      <i class="bx bxs-log-in"></i>
+      <span class="text">Register</span>
+    </a>
+  </div>
+</form>
+} @else {
+<mat-spinner></mat-spinner>
+}
