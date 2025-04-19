@@ -17,7 +17,7 @@ export class HeaderComponent {
 
   logout(): void {
     this.logoutEvent.emit();
-    this.toastr.info('Logged out', 'Money Tracker', {
+    this.toastr.info('Logged out', 'Performax', {
       positionClass: 'toast-bottom-center',
       toastClass: 'ngx-toastr custom info',
     });

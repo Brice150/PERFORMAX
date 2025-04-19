@@ -74,6 +74,7 @@ form .button-container a {
 form .button-container a:hover {
   background-color: var(--accent);
   color: var(--primary);
+  box-shadow: var(--box-shadow-active);
 }
 
 form .button-container a i {
@@ -159,7 +160,7 @@ mat-spinner {
 ::ng-deep
   .mdc-text-field--filled:not(.mdc-text-field--disabled)
   .mdc-text-field__input {
-  color: var(--primary) !important;
+  color: var(--secondary) !important;
 }
 
 ::ng-deep
@@ -176,5 +177,5 @@ mat-spinner {
 
 ::ng-deep mat-form-field.mat-form-field-invalid {
   --accent: red;
-  --primary: red;
+  --secondary: red;
 }

@@ -1,10 +1,11 @@
 :root {
-  --primary: black;
-  --secondary: #ff9451;
-  --accent: #ff5151;
+  --primary: #e4e9f7;
+  --secondary: black;
+  --accent: #38a95a;
   --background: #e4e9f7;
   --box-shadow-color: rgba(0, 0, 0, 0.4);
-  --box-shadow: 0 2rem 3rem var(--box-shadow-color);
+  --box-shadow: 0 1rem 3rem var(--box-shadow-color);
+  --box-shadow-active: 0 0 12px var(--accent);
 
   --strong-radius: 20px;
   --light-radius: 10px;

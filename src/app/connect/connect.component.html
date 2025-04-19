@@ -3,7 +3,6 @@
     <a
       (click)="toggleLoginOrRegister('register')"
       title="Register"
-      class="left"
       [ngClass]="isRegistering ? 'active' : 'unactive'"
     >
       <h1>Register</h1>
@@ -11,7 +10,6 @@
     <a
       (click)="toggleLoginOrRegister('login')"
       title="Login"
-      class="right"
       [ngClass]="!isRegistering ? 'active' : 'unactive'"
     >
       <h1>Login</h1>

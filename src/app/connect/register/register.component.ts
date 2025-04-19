@@ -97,7 +97,7 @@ export class RegisterComponent {
           next: () => {
             this.loading = false;
             this.router.navigate(['/']);
-            this.toastr.info('Welcome', 'Money Tracker', {
+            this.toastr.info('Welcome', 'Performax', {
               positionClass: 'toast-bottom-center',
               toastClass: 'ngx-toastr custom info',
             });
@@ -107,7 +107,7 @@ export class RegisterComponent {
             if (
               !error.message.includes('Missing or insufficient permissions.')
             ) {
-              this.toastr.error(error.message, 'Money Tracker', {
+              this.toastr.error(error.message, 'Performax', {
                 positionClass: 'toast-bottom-center',
                 toastClass: 'ngx-toastr custom error',
               });

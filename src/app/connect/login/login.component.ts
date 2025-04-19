@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
           next: () => {
             this.loading = false;
             this.router.navigate(['/']);
-            this.toastr.info('Welcome', 'Money Tracker', {
+            this.toastr.info('Welcome', 'Performax', {
               positionClass: 'toast-bottom-center',
               toastClass: 'ngx-toastr custom info',
             });
