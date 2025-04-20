@@ -18,10 +18,10 @@ import { Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, filter, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { ProfileService } from '../core/services/profile.service';
-import { UserService } from '../core/services/user.service';
-import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
-import { ProgramsService } from '../core/services/programs.service';
 import { ProgressService } from '../core/services/progress.service';
+import { UserService } from '../core/services/user.service';
+import { WorkoutsService } from '../core/services/workouts.service';
+import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-profil',
@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   fb = inject(FormBuilder);
   profileService = inject(ProfileService);
   userService = inject(UserService);
-  programsService = inject(ProgramsService);
+  workoutsService = inject(WorkoutsService);
   progressService = inject(ProgressService);
   dialog = inject(MatDialog);
   router = inject(Router);
@@ -134,7 +134,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         filter((res: boolean) => res),
         switchMap(() => {
           this.loading = true;
-          return this.programsService.deleteUserPrograms();
+          return this.workoutsService.deleteUserWorkouts();
         }),
         switchMap(() => this.progressService.deleteUserProgress()),
         switchMap(() =>

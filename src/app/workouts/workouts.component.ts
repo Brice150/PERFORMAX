@@ -1,42 +1,50 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ProgramsService } from '../core/services/programs.service';
-import { Subject, take, takeUntil } from 'rxjs';
-import { Programs } from '../core/interfaces/programs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { Program } from '../core/interfaces/program';
+import { Subject, take, takeUntil } from 'rxjs';
+import { Workout } from '../core/interfaces/workout';
+import { WorkoutsService } from '../core/services/workouts.service';
 
 @Component({
-  selector: 'app-programs',
-  imports: [CommonModule, MatProgressSpinnerModule],
-  templateUrl: './programs.component.html',
-  styleUrl: './programs.component.css',
+  selector: 'app-workouts',
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+  ],
+  templateUrl: './workouts.component.html',
+  styleUrl: './workouts.component.css',
 })
-export class ProgramsComponent implements OnInit, OnDestroy {
-  programsService = inject(ProgramsService);
+export class WorkoutsComponent implements OnInit, OnDestroy {
+  workoutsService = inject(WorkoutsService);
   destroyed$ = new Subject<void>();
   loading: boolean = true;
-  programs: Programs = {} as Programs;
+  workouts: Workout[] = [];
   toastr = inject(ToastrService);
+  updateNeeded: boolean = false;
 
   ngOnInit(): void {
-    this.programs.programs = [];
-    this.programsService
-      .getPrograms()
+    this.workoutsService
+      .getWorkouts()
       .pipe(take(1), takeUntil(this.destroyed$))
       .subscribe({
-        next: (programs: Programs[]) => {
-          if (programs[0]?.programs?.length >= 0) {
-            this.programs = programs[0];
+        next: (workouts: Workout[]) => {
+          if (workouts?.length >= 0) {
+            this.workouts = workouts;
           }
           this.loading = false;
         },
         error: (error: HttpErrorResponse) => {
           this.loading = false;
           if (!error.message.includes('Missing or insufficient permissions.')) {
-            this.toastr.error(error.message, 'Programs', {
+            this.toastr.error(error.message, 'Workouts', {
               positionClass: 'toast-bottom-center',
               toastClass: 'ngx-toastr custom error',
             });
@@ -50,21 +58,25 @@ export class ProgramsComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  addProgram(): void {
+  toggleUpdateNeeded(): void {
+    this.updateNeeded = true;
+  }
+
+  addWorkout(): void {
     this.loading = true;
-    const program: Program = {
-      title: 'Program',
+    const workout: Workout = {
+      title: 'Workout',
       exercises: [],
     };
-    this.programs.programs.push(program);
 
-    this.programsService
-      .addPrograms(this.programs)
+    this.workoutsService
+      .addWorkout(workout)
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
         next: () => {
+          this.workouts.push(workout);
           this.loading = false;
-          this.toastr.info('Program added', 'Programs', {
+          this.toastr.info('Workout added', 'Workouts', {
             positionClass: 'toast-bottom-center',
             toastClass: 'ngx-toastr custom info',
           });
@@ -72,7 +84,7 @@ export class ProgramsComponent implements OnInit, OnDestroy {
         error: (error: HttpErrorResponse) => {
           this.loading = false;
           if (!error.message.includes('Missing or insufficient permissions.')) {
-            this.toastr.error(error.message, 'Programs', {
+            this.toastr.error(error.message, 'Workouts', {
               positionClass: 'toast-bottom-center',
               toastClass: 'ngx-toastr custom error',
             });

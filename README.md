@@ -18,10 +18,10 @@ Backend/Database : Firebase
 - Login with failure animation for bad credentials
 - Logout is available on menu once logged in
 
-### Programs
+### Workouts
 
-- View your programs
-- Add, modify or delete a program
+- View your workouts
+- Add, modify or delete a workout
 
 ### Progress
 

@@ -1,6 +1,8 @@
 import { Exercise } from './exercise';
 
-export interface Program {
+export interface Workout {
+  id?: string;
   title: string;
   exercises: Exercise[];
+  userId?: string;
 }
