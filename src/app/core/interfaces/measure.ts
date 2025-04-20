@@ -1,5 +1,5 @@
 export interface Measure {
-  date: string;
+  date: Date;
   weight: number;
   fat: number;
   muscle: number;

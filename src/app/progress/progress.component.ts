@@ -11,6 +11,7 @@ import { Subject, take, takeUntil } from 'rxjs';
 import { Measure } from '../core/interfaces/measure';
 import { Progress } from '../core/interfaces/progress';
 import { ProgressService } from '../core/services/progress.service';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-progress',
@@ -43,7 +44,17 @@ export class ProgressComponent implements OnInit, OnDestroy {
         next: (progress: Progress[]) => {
           if (progress[0]?.measures?.length >= 0) {
             this.progress = progress[0];
-            console.log(this.progress.measures);
+            this.progress.measures = this.progress.measures.map((measure) => ({
+              ...measure,
+              date:
+                measure.date instanceof Timestamp
+                  ? measure.date.toDate()
+                  : new Date(measure.date),
+            }));
+
+            this.progress.measures.sort(
+              (a, b) => a.date.getTime() - b.date.getTime()
+            );
           }
           this.loading = false;
           this.displayGraph();
@@ -71,7 +82,9 @@ export class ProgressComponent implements OnInit, OnDestroy {
       this.graph = new Chart(graph, {
         type: 'line',
         data: {
-          labels: this.progress.measures.map((measure) => measure.date),
+          labels: this.progress.measures.map(
+            (measure) => this.datePipe.transform(measure.date, 'dd/MM/yyyy')!
+          ),
           datasets: [
             {
               label: 'Weight',
@@ -133,7 +146,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
   updateGraph(): void {
     if (this.graph) {
       this.graph.data.labels = this.progress.measures.map(
-        (measure) => measure.date
+        (measure) => this.datePipe.transform(measure.date, 'dd/MM/yyyy')!
       );
       this.graph.data.datasets[0].data = this.progress.measures.map(
         (measure) => measure.weight
@@ -155,7 +168,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
   addProgress(): void {
     this.loading = true;
     const measure: Measure = {
-      date: this.datePipe.transform(new Date(), 'dd/MM/yyyy')!,
+      date: new Date(),
       weight: 60,
       fat: 10,
       muscle: 45,
