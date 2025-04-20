@@ -1,8 +1,91 @@
 <section>
-  @if (!loading) {
-  <div class="content">Progress</div>
-  }
+  <div class="column">
+    <div class="graph" [ngClass]="{ visible: progress.measures.length > 0 }">
+      <canvas id="graph"></canvas>
+    </div>
+    @if (progress.measures.length > 0) {
+    <div class="value-container">
+      <div class="subtitle">
+        <i class="bx bxs-time-five"></i>
+        <span>Last :</span>
+      </div>
+      <span class="number">
+        {{ progress.measures[progress.measures.length - 1].weight }} kg ({{
+          progress.measures[progress.measures.length - 1].fat
+        }}
+        % fat)
+      </span>
+    </div>
+    }
+    <form>
+      @for (measure of progress.measures; track $index; let index = $index) {
+      <div class="row">
+        <mat-form-field>
+          <mat-label>WEIGHT</mat-label>
+          <input
+            matInput
+            [(ngModel)]="measure.weight"
+            [name]="'weight' + index"
+            type="number"
+            (ngModelChange)="toggleUpdateNeeded()"
+            min="0"
+            max="1000000000"
+            required
+          />
+          <span matSuffix>kg</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>MUSCLE</mat-label>
+          <input
+            matInput
+            [(ngModel)]="measure.muscle"
+            [name]="'muscle' + index"
+            type="number"
+            (ngModelChange)="toggleUpdateNeeded()"
+            min="0"
+            max="100"
+            required
+          />
+          <span matSuffix>%</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>FAT</mat-label>
+          <input
+            matInput
+            [(ngModel)]="measure.fat"
+            [name]="'fat' + index"
+            type="number"
+            (ngModelChange)="toggleUpdateNeeded()"
+            min="0"
+            max="100"
+            required
+          />
+          <span matSuffix>%</span>
+        </mat-form-field>
+        <div class="delete-container">
+          <a
+            (click)="deleteMeasure(index)"
+            class="delete"
+            title="Delete Measure"
+          >
+            <i class="bx bx-x"></i>
+          </a>
+        </div>
+      </div>
+      }
+    </form>
+    <div class="button-container">
+      <a (click)="addProgress()" class="add" title="Add Measure">
+        <i class="bx bx-plus"></i>
+      </a>
+      @if(updateNeeded) {
+      <a (click)="updateProgress()" class="update" title="Update Measures">
+        <i class="bx bx-check"></i>
+      </a>
+      }
+    </div>
+  </div>
 </section>
-@if (loading) {
+@if(loading) {
 <mat-spinner></mat-spinner>
 }

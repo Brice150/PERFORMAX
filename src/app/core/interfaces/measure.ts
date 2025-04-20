@@ -1,9 +1,6 @@
 export interface Measure {
-  date: Date;
-  totalWeight: number;
-  fatWeight: number;
-  musclesWeight: number;
-  bonesWeight: number;
-  height: number;
-  imc: number;
+  date: string;
+  weight: number;
+  fat: number;
+  muscle: number;
 }

@@ -21,19 +21,230 @@ section {
   border-radius: var(--light-radius);
 }
 
-section .content {
-  padding: 30px 0;
+.column {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 70%;
-  gap: 20px;
+  width: 100%;
+}
+
+.graph {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease-in-out, visibility 0s linear 1s;
+}
+
+.graph.visible {
+  width: 100%;
+  height: 500px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1s ease-in-out;
+}
+
+section form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--strong-radius);
+  margin-top: 10px;
+  padding: 0 10px;
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+section form .row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+section .delete-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section form .delete {
+  width: 50px;
+  height: 50px;
+  color: red;
+  background-color: var(--background);
+  border-radius: var(--light-radius);
+  cursor: pointer;
+  transition: 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section form .delete i {
+  font-size: 50px;
+}
+
+section form .delete:hover {
+  color: var(--primary);
+  background-color: red;
+  box-shadow: var(--box-shadow-active-red);
+}
+
+section .button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+section .add {
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.5s ease;
+  box-shadow: var(--box-shadow);
+  color: var(--accent);
+  border-radius: var(--light-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+section .add i {
+  font-size: 50px;
+}
+
+section .add:hover {
+  color: var(--primary);
+  background-color: var(--accent);
+  box-shadow: var(--box-shadow-active);
+}
+
+section .update {
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.5s ease;
+  box-shadow: var(--box-shadow);
+  color: var(--secondary);
+  border-radius: var(--light-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+section .update i {
+  font-size: 50px;
+}
+
+section .update:hover {
+  color: var(--primary);
+  background-color: var(--secondary);
+  box-shadow: var(--box-shadow-active-secondary);
+}
+
+section form input {
+  color: var(--secondary);
+}
+
+section form mat-label {
+  color: var(--accent);
+}
+
+section .value-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 300px;
+  gap: 10px;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--light-radius);
+  padding: 7px 0;
+  margin-bottom: 10px;
+}
+
+section .value-container .subtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+section .value-container .number {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--secondary);
+  margin-right: 5px;
+}
+
+section .value-container i {
+  font-size: 40px;
+  margin-right: 10px;
 }
 
 mat-spinner {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+::ng-deep .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: var(--accent) !important;
+}
+
+::ng-deep section form .mat-mdc-form-field-icon-suffix {
+  color: var(--accent);
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--background) !important;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper,
+.mat-mdc-form-field-bottom-align::before {
+  display: none;
+}
+
+::ng-deep
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::before {
+  border-bottom-color: var(--accent) !important;
+}
+
+@media screen and (max-width: 740px) {
+  section form {
+    max-height: none;
+    overflow-y: hidden;
+  }
+
+  .graph {
+    height: 400px;
+  }
+
+  section .delete-container {
+    width: 210px;
+  }
+
+  section form .row {
+    margin: 10px 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .graph {
+    height: 350px;
+  }
 }
