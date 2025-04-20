@@ -1,1 +1,8 @@
-<p>progress works!</p>
+<section>
+  @if (!loading) {
+  <div class="content">Progress</div>
+  }
+</section>
+@if (loading) {
+<mat-spinner></mat-spinner>
+}

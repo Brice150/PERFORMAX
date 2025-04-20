@@ -6,6 +6,7 @@
   --box-shadow-color: rgba(0, 0, 0, 0.4);
   --box-shadow: 0 1rem 3rem var(--box-shadow-color);
   --box-shadow-active: 0 0 12px var(--accent);
+  --box-shadow-active-red: 0 0 12px red;
 
   --strong-radius: 20px;
   --light-radius: 10px;

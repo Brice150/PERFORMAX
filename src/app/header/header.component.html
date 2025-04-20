@@ -1,18 +1,23 @@
 <nav>
-  <a routerLink="/" routerLinkActive="active" title="Programs">
+  <a
+    routerLink="/"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    title="Programs"
+  >
+    <span class="text">Programs</span>
     <i class="bx bxs-calendar-edit"></i>
-    <span class="description">Programs</span>
   </a>
   <a routerLink="/progress" routerLinkActive="active" title="Progress">
+    <span class="text">Progress</span>
     <i class="bx bxs-bar-chart-alt-2"></i>
-    <span class="description">Progress</span>
   </a>
   <a routerLink="/profile" routerLinkActive="active" title="Profile">
+    <span class="text">Profile</span>
     <i class="bx bxs-user"></i>
-    <span class="description">Profile</span>
   </a>
   <a (click)="logout()" title="Logout">
+    <span class="text">Logout</span>
     <i class="bx bxs-log-out"></i>
-    <span class="description">Logout</span>
   </a>
 </nav>

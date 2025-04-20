@@ -5,7 +5,7 @@ section {
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 700px;
-  border-radius: 20px;
+  border-radius: var(--light-radius);
   box-shadow: var(--box-shadow);
 }
 

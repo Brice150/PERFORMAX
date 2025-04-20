@@ -20,6 +20,8 @@ import { catchError, filter, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { ProfileService } from '../core/services/profile.service';
 import { UserService } from '../core/services/user.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ProgramsService } from '../core/services/programs.service';
+import { ProgressService } from '../core/services/progress.service';
 
 @Component({
   selector: 'app-profil',
@@ -42,9 +44,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   fb = inject(FormBuilder);
   profileService = inject(ProfileService);
   userService = inject(UserService);
-  //expensesService = inject(ExpensesService);
-  //investmentsService = inject(InvestmentsService);
-  //realEstateService = inject(RealEstateService);
+  programsService = inject(ProgramsService);
+  progressService = inject(ProgressService);
   dialog = inject(MatDialog);
   router = inject(Router);
   hide: boolean = true;
@@ -126,17 +127,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: 'delete your profile',
     });
-    /*
+
     dialogRef
       .afterClosed()
       .pipe(
         filter((res: boolean) => res),
         switchMap(() => {
           this.loading = true;
-          return this.expensesService.deleteUserExpenses();
+          return this.programsService.deleteUserPrograms();
         }),
-        switchMap(() => this.investmentsService.deleteUserInvestments()),
-        switchMap(() => this.realEstateService.deleteUserRealEstate()),
+        switchMap(() => this.progressService.deleteUserProgress()),
         switchMap(() =>
           this.profileService.deleteProfile().pipe(
             catchError(() => {
@@ -181,7 +181,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
           }
         },
       });
-      */
   }
 
   passwordMatchValidator(control: AbstractControl): void {

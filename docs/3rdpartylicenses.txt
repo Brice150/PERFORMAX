@@ -296,6 +296,8 @@ SOFTWARE.
 
 rxfire/auth
 
+rxfire/firestore
+
 rxjs
 Apache-2.0
                                Apache License
