@@ -1,8 +1,5 @@
 <section>
   <div class="column">
-    <div class="graph" [ngClass]="{ visible: progress.measures.length > 0 }">
-      <canvas id="graph"></canvas>
-    </div>
     @if (progress.measures.length > 0) {
     <div class="value-container">
       <div class="subtitle">
@@ -13,10 +10,13 @@
         {{ progress.measures[progress.measures.length - 1].weight }} kg ({{
           progress.measures[progress.measures.length - 1].fat
         }}
-        % fat)
+        % Fat)
       </span>
     </div>
     }
+    <div class="graph" [ngClass]="{ visible: progress.measures.length > 0 }">
+      <canvas id="graph"></canvas>
+    </div>
     <form>
       @for (measure of progress.measures; track $index; let index = $index) {
       <div class="row">
