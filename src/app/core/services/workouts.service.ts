@@ -26,17 +26,32 @@ import { Workout } from '../interfaces/workout';
 export class WorkoutsService {
   firestore = inject(Firestore);
   userService = inject(UserService);
-  workoutsCollection = collection(this.firestore, 'workout');
+  workoutsCollection = collection(this.firestore, 'workouts');
 
   getWorkouts(): Observable<Workout[]> {
     const userId = this.userService.auth.currentUser?.uid;
     const workoutsCollection = query(
-      collection(this.firestore, 'workout'),
+      collection(this.firestore, 'workouts'),
       where('userId', '==', userId)
     );
     return collectionData(workoutsCollection, { idField: 'id' }) as Observable<
       Workout[]
     >;
+  }
+
+  getWorkout(workoutId: string): Observable<Workout | null> {
+    const userId = this.userService.auth.currentUser?.uid;
+    if (!userId) return of(null);
+
+    const workoutsQuery = query(
+      this.workoutsCollection,
+      where('userId', '==', userId),
+      where('id', '==', workoutId)
+    );
+
+    return collectionData(workoutsQuery, { idField: 'id' }).pipe(
+      map((workouts) => (workouts.length > 0 ? workouts[0] : null))
+    ) as Observable<Workout | null>;
   }
 
   addWorkout(workout: Workout): Observable<string> {

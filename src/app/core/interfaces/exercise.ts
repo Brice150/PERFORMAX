@@ -1,5 +1,5 @@
 export interface Exercise {
   title: string;
-  repetitionsNumber: number;
+  repetitions: string;
   lastPerformance: string;
 }

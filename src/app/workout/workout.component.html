@@ -1,0 +1,66 @@
+<form>
+  <mat-form-field>
+    <mat-label>TITLE</mat-label>
+    <input
+      matInput
+      [(ngModel)]="workout.title"
+      name="workoutTitle"
+      type="text"
+      (ngModelChange)="toggleUpdateNeeded()"
+      required
+    />
+  </mat-form-field>
+  @for (exercise of workout.exercises; track $index; let index = $index) {
+  <div class="exercise">
+    <mat-form-field>
+      <mat-label>TITLE</mat-label>
+      <input
+        matInput
+        [(ngModel)]="exercise.title"
+        [name]="'exerciseTitle' + index"
+        type="text"
+        (ngModelChange)="toggleUpdateNeeded()"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>REPETITIONS</mat-label>
+      <input
+        matInput
+        [(ngModel)]="exercise.repetitions"
+        [name]="'repetitions' + index"
+        type="text"
+        (ngModelChange)="toggleUpdateNeeded()"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>PERFORMANCE</mat-label>
+      <input
+        matInput
+        [(ngModel)]="exercise.lastPerformance"
+        [name]="'lastPerformance' + index"
+        type="text"
+        (ngModelChange)="toggleUpdateNeeded()"
+        required
+      />
+    </mat-form-field>
+    <a (click)="deleteExercise(index)" class="delete" title="Delete Exercise">
+      <i class="bx bx-x"></i>
+    </a>
+  </div>
+  }
+  <div class="button-container">
+    <a (click)="addExercise()" class="add" title="Add Exercise">
+      <i class="bx bx-plus"></i>
+    </a>
+    <a (click)="deleteWorkout()" class="delete" title="Delete Workout">
+      <i class="bx bx-x"></i>
+    </a>
+    @if(updateNeeded) {
+    <a (click)="updateWorkout()" class="update" title="Update Workout">
+      <i class="bx bx-check"></i>
+    </a>
+    }
+  </div>
+</form>

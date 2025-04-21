@@ -1,0 +1,14 @@
+<a class="workout" [routerLink]="'/workout/' + workout.id" title="Edit workout">
+  <div class="title">
+    <i class="bx bx-run"></i>
+    <span>{{ workout.title }}</span>
+  </div>
+  @for (exercise of workout.exercises; track $index; let index = $index) {
+  <div class="exercise">
+    <i class="bx bx-right-arrow-alt"></i>
+    <span>{{ exercise.title }}</span>
+    <span>{{ exercise.repetitions }}</span>
+    <span>{{ exercise.lastPerformance }}</span>
+  </div>
+  }
+</a>

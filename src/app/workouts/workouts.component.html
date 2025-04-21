@@ -2,57 +2,13 @@
   @if (!loading) {
   <div class="content">
     @for (workout of workouts; track $index; let index = $index) {
-    <div class="program">
-      <mat-form-field>
-        <mat-label>TITLE</mat-label>
-        <input
-          matInput
-          [(ngModel)]="workout.title"
-          [name]="'programTitle' + index"
-          type="text"
-          (ngModelChange)="toggleUpdateNeeded()"
-          required
-        />
-      </mat-form-field>
-      @for (exercise of workout.exercises; track $index) {
-      <div class="exercise">
-        <mat-form-field>
-          <mat-label>TITLE</mat-label>
-          <input
-            matInput
-            [(ngModel)]="exercise.title"
-            [name]="'exerciseTitle' + index"
-            type="text"
-            (ngModelChange)="toggleUpdateNeeded()"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>REPS NUMBER</mat-label>
-          <input
-            matInput
-            [(ngModel)]="exercise.repetitionsNumber"
-            [name]="'repetitionsNumber' + index"
-            type="text"
-            (ngModelChange)="toggleUpdateNeeded()"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>PERFORMANCE</mat-label>
-          <input
-            matInput
-            [(ngModel)]="exercise.lastPerformance"
-            [name]="'lastPerformance' + index"
-            type="text"
-            (ngModelChange)="toggleUpdateNeeded()"
-            required
-          />
-        </mat-form-field>
-      </div>
-      }
-    </div>
+    <app-workout-card [workout]="workout"></app-workout-card>
     }
+    <div class="button-container">
+      <a (click)="addWorkout()" class="add" title="Add Workout">
+        <i class="bx bx-plus"></i>
+      </a>
+    </div>
   </div>
   }
 </section>

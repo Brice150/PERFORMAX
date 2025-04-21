@@ -5,11 +5,11 @@ import { ConnectComponent } from './connect/connect.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProgressComponent } from './progress/progress.component';
 import { WorkoutsComponent } from './workouts/workouts.component';
-import { WorkoutComponent } from './workouts/workout/workout.component';
+import { WorkoutComponent } from './workout/workout.component';
 
 export const routes: Routes = [
   { path: 'connect', component: ConnectComponent, canActivate: [noUserGuard] },
-  { path: '', component: WorkoutsComponent, canActivate: [userGuard] },
+  { path: 'workout', component: WorkoutsComponent, canActivate: [userGuard] },
   {
     path: 'workout/:id',
     component: WorkoutComponent,
@@ -17,5 +17,5 @@ export const routes: Routes = [
   },
   { path: 'progress', component: ProgressComponent, canActivate: [userGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [userGuard] },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: 'workout', pathMatch: 'full' },
 ];
