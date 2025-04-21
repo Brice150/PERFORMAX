@@ -1,14 +1,14 @@
 <section>
   @if (!loading) {
   <div class="content">
-    @for (workout of workouts; track $index; let index = $index) {
-    <app-workout-card [workout]="workout"></app-workout-card>
-    }
-    <div class="button-container">
-      <a (click)="addWorkout()" class="add" title="Add Workout">
-        <i class="bx bx-plus"></i>
-      </a>
+    <div class="workouts">
+      @for (workout of workouts; track $index; let index = $index) {
+      <app-workout-card [workout]="workout"></app-workout-card>
+      }
     </div>
+    <a (click)="addWorkout()" class="add" title="Add Workout">
+      <i class="bx bx-plus"></i>
+    </a>
   </div>
   }
 </section>

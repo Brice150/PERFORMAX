@@ -25,7 +25,7 @@ export class WorkoutsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.workoutsService
       .getWorkouts()
-      .pipe(take(1), takeUntil(this.destroyed$))
+      .pipe(takeUntil(this.destroyed$))
       .subscribe({
         next: (workouts: Workout[]) => {
           if (workouts?.length >= 0) {

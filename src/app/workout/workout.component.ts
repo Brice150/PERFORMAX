@@ -4,16 +4,25 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ToastrService } from 'ngx-toastr';
-import { Subject, switchMap, take, takeUntil } from 'rxjs';
+import { filter, Subject, switchMap, take, takeUntil } from 'rxjs';
 import { Exercise } from '../core/interfaces/exercise';
 import { Workout } from '../core/interfaces/workout';
 import { WorkoutsService } from '../core/services/workouts.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-workout',
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './workout.component.html',
   styleUrl: './workout.component.css',
 })
@@ -26,6 +35,7 @@ export class WorkoutComponent implements OnInit {
   destroyed$ = new Subject<void>();
   loading: boolean = true;
   toastr = inject(ToastrService);
+  dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.activatedRoute.params
@@ -77,38 +87,66 @@ export class WorkoutComponent implements OnInit {
   }
 
   updateWorkout(): void {
-    this.loading = true;
+    if (
+      this.workout.title.length >= 2 &&
+      this.workout.title.length <= 50 &&
+      !this.workout.exercises.some(
+        (measure) =>
+          measure.title.length < 2 ||
+          measure.title.length > 50 ||
+          measure.repetitions.length > 20 ||
+          measure.lastPerformance.length > 20
+      )
+    ) {
+      this.loading = true;
 
-    this.workoutsService
-      .updateWorkout(this.workout)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe({
-        next: () => {
-          this.updateNeeded = false;
-          this.loading = false;
-          this.toastr.info('Workout updated', 'Workout', {
-            positionClass: 'toast-bottom-center',
-            toastClass: 'ngx-toastr custom info',
-          });
-        },
-        error: (error: HttpErrorResponse) => {
-          this.loading = false;
-          if (!error.message.includes('Missing or insufficient permissions.')) {
-            this.toastr.error(error.message, 'progress', {
+      this.workoutsService
+        .updateWorkout(this.workout)
+        .pipe(takeUntil(this.destroyed$))
+        .subscribe({
+          next: () => {
+            this.updateNeeded = false;
+            this.loading = false;
+            this.toastr.info('Workout updated', 'Workout', {
               positionClass: 'toast-bottom-center',
-              toastClass: 'ngx-toastr custom error',
+              toastClass: 'ngx-toastr custom info',
             });
-          }
-        },
+          },
+          error: (error: HttpErrorResponse) => {
+            this.loading = false;
+            if (
+              !error.message.includes('Missing or insufficient permissions.')
+            ) {
+              this.toastr.error(error.message, 'Workout', {
+                positionClass: 'toast-bottom-center',
+                toastClass: 'ngx-toastr custom error',
+              });
+            }
+          },
+        });
+    } else {
+      this.toastr.info('Invalid workout', 'Workout', {
+        positionClass: 'toast-bottom-center',
+        toastClass: 'ngx-toastr custom error',
       });
+    }
   }
 
   deleteWorkout(): void {
-    this.loading = true;
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: 'delete this workout',
+    });
 
-    this.workoutsService
-      .deleteWorkout(this.workout.id!)
-      .pipe(takeUntil(this.destroyed$))
+    dialogRef
+      .afterClosed()
+      .pipe(
+        filter((res: boolean) => res),
+        switchMap(() => {
+          this.loading = true;
+          return this.workoutsService.deleteWorkout(this.workout.id!);
+        }),
+        takeUntil(this.destroyed$)
+      )
       .subscribe({
         next: () => {
           this.router.navigate(['/workout']);

@@ -1,3 +1,11 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+}
+
 .workout {
   display: flex;
   justify-content: center;
@@ -5,7 +13,7 @@
   flex-direction: column;
   margin: 10px;
   padding: 10px;
-  width: 280px;
+  width: 100%;
   box-shadow: var(--box-shadow);
   border-radius: var(--light-radius);
   text-decoration: none;
@@ -20,6 +28,23 @@
   box-shadow: var(--box-shadow-active);
 }
 
+.workout .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.workout .title i {
+  font-size: 30px;
+}
+
+.workout .title span {
+  font-size: 20px;
+  font-weight: 500;
+}
+
 .workout .exercise {
   display: flex;
   justify-content: space-between;
@@ -28,18 +53,26 @@
   color: var(--secondary);
 }
 
-.workout .title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.workout i {
-  font-size: 30px;
-}
-
-.workout .title span {
+.workout .exercise i {
   font-size: 20px;
+  padding: 5px 0;
+}
+
+.workout .exercise span {
+  font-size: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.workout .exercise span.small {
+  width: 50px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.workout .exercise span.large {
+  width: 150px;
+  text-align: left;
   font-weight: 500;
 }

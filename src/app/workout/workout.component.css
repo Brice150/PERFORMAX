@@ -1,0 +1,199 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+section {
+  position: relative;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 95%;
+  max-width: 1200px;
+  background-color: var(--background);
+  color: var(--accent);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--light-radius);
+}
+
+section .content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 0 10px;
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+section .content .title {
+  margin-bottom: 20px;
+}
+
+section .content .row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+section .delete-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section .content .delete {
+  width: 50px;
+  height: 50px;
+  color: red;
+  background-color: var(--background);
+  border-radius: var(--light-radius);
+  cursor: pointer;
+  transition: 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section .content .button-container .delete {
+  box-shadow: var(--box-shadow);
+}
+
+section .content .button-container .delete:hover {
+  box-shadow: var(--box-shadow-active-red);
+}
+
+section .content .delete i {
+  font-size: 50px;
+}
+
+section .content .delete:hover {
+  color: var(--primary);
+  background-color: red;
+  box-shadow: var(--box-shadow-active-red);
+}
+
+section .button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+section .add {
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.5s ease;
+  box-shadow: var(--box-shadow);
+  color: var(--accent);
+  border-radius: var(--light-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+section .add i {
+  font-size: 50px;
+}
+
+section .add:hover {
+  color: var(--primary);
+  background-color: var(--accent);
+  box-shadow: var(--box-shadow-active);
+}
+
+section .update {
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.5s ease;
+  box-shadow: var(--box-shadow);
+  color: var(--secondary);
+  border-radius: var(--light-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+section .update i {
+  font-size: 50px;
+}
+
+section .update:hover {
+  color: var(--primary);
+  background-color: var(--secondary);
+  box-shadow: var(--box-shadow-active-secondary);
+}
+
+section .content input {
+  color: var(--secondary);
+}
+
+section .content mat-label {
+  color: var(--accent);
+}
+
+mat-spinner {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+::ng-deep .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: var(--accent) !important;
+}
+
+::ng-deep section .content .mat-mdc-form-field-icon-suffix {
+  color: var(--accent);
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--background) !important;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper,
+.mat-mdc-form-field-bottom-align::before {
+  display: none;
+}
+
+::ng-deep
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::before {
+  border-bottom-color: var(--accent) !important;
+}
+
+::ng-deep
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after {
+  border-bottom-color: var(--accent) !important;
+}
+
+::ng-deep mat-form-field.mat-form-field-invalid {
+  --secondary: red;
+  --accent: red;
+}
+
+@media screen and (max-width: 740px) {
+  section .content {
+    max-height: none;
+    overflow-y: hidden;
+  }
+
+  section .delete-container {
+    width: 210px;
+  }
+
+  section .content .row {
+    margin: 10px 0;
+  }
+}

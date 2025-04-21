@@ -7,11 +7,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import Chart from 'chart.js/auto';
 import { ToastrService } from 'ngx-toastr';
-import { Subject, take, takeUntil } from 'rxjs';
+import { filter, Subject, take, takeUntil } from 'rxjs';
 import { Measure } from '../core/interfaces/measure';
 import { Progress } from '../core/interfaces/progress';
 import { ProgressService } from '../core/services/progress.service';
 import { Timestamp } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-progress',
@@ -34,6 +36,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
   datePipe: DatePipe = new DatePipe('fr');
   updateNeeded: boolean = false;
   graph?: Chart<'line', number[], string>;
+  dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.progress.measures = [];
@@ -181,7 +184,14 @@ export class ProgressComponent implements OnInit, OnDestroy {
   updateProgress(): void {
     if (
       !this.progress.measures.some(
-        (measure) => measure.weight < 0 || measure.fat < 0 || measure.muscle < 0
+        (measure) =>
+          measure.weight < 0 ||
+          measure.fat < 0 ||
+          measure.muscle < 0 ||
+          measure.weight > 300 ||
+          measure.fat > 100 ||
+          measure.muscle > 100 ||
+          measure.fat + measure.muscle > 100
       ) &&
       this.progress.measures.every(
         (measure) =>
@@ -203,8 +213,27 @@ export class ProgressComponent implements OnInit, OnDestroy {
   }
 
   deleteMeasure(index: number) {
-    this.progress.measures.splice(index, 1);
-    this.saveUserProgress('deleted');
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: 'delete this measure',
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(filter((res: boolean) => res))
+      .subscribe({
+        next: () => {
+          this.progress.measures.splice(index, 1);
+          this.saveUserProgress('deleted');
+        },
+        error: (error: HttpErrorResponse) => {
+          if (!error.message.includes('Missing or insufficient permissions.')) {
+            this.toastr.error(error.message, 'Progress', {
+              positionClass: 'toast-bottom-center',
+              toastClass: 'ngx-toastr custom error',
+            });
+          }
+        },
+      });
   }
 
   saveUserProgress(toastrMessage: string): void {

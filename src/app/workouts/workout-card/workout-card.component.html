@@ -6,9 +6,9 @@
   @for (exercise of workout.exercises; track $index; let index = $index) {
   <div class="exercise">
     <i class="bx bx-right-arrow-alt"></i>
-    <span>{{ exercise.title }}</span>
-    <span>{{ exercise.repetitions }}</span>
-    <span>{{ exercise.lastPerformance }}</span>
+    <span class="large">{{ exercise.title }}</span>
+    <span class="small">{{ exercise.repetitions }}</span>
+    <span class="small">{{ exercise.lastPerformance }}</span>
   </div>
   }
 </a>

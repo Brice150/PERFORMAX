@@ -54,7 +54,7 @@ section form {
   align-items: center;
   flex-direction: column;
   box-shadow: var(--box-shadow);
-  border-radius: var(--strong-radius);
+  border-radius: var(--light-radius);
   margin-top: 10px;
   padding: 0 10px;
   max-height: 480px;
@@ -221,6 +221,17 @@ mat-spinner {
   .mdc-text-field--filled:not(.mdc-text-field--disabled)
   .mdc-line-ripple::before {
   border-bottom-color: var(--accent) !important;
+}
+
+::ng-deep
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after {
+  border-bottom-color: var(--accent) !important;
+}
+
+::ng-deep mat-form-field.mat-form-field-invalid {
+  --secondary: red;
+  --accent: red;
 }
 
 @media screen and (max-width: 740px) {
