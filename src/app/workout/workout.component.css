@@ -142,6 +142,11 @@ section .content mat-label {
   color: var(--accent);
 }
 
+.row i {
+  font-size: 30px;
+  cursor: grab;
+}
+
 mat-spinner {
   position: absolute;
   top: 40%;
@@ -195,5 +200,11 @@ mat-spinner {
 
   section .content .row {
     margin: 10px 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  section .content .row {
+    flex-direction: column;
   }
 }

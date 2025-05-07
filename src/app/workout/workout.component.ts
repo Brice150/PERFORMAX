@@ -1,17 +1,24 @@
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragHandle,
+  CdkDropList,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter, Subject, switchMap, take, takeUntil } from 'rxjs';
 import { Exercise } from '../core/interfaces/exercise';
 import { Workout } from '../core/interfaces/workout';
 import { WorkoutsService } from '../core/services/workouts.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -22,6 +29,9 @@ import { ConfirmationDialogComponent } from '../shared/components/confirmation-d
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    CdkDropList,
+    CdkDrag,
+    CdkDragHandle,
   ],
   templateUrl: './workout.component.html',
   styleUrl: './workout.component.css',
@@ -64,6 +74,17 @@ export class WorkoutComponent implements OnInit {
           }
         },
       });
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+      this.workout.exercises,
+      event.previousIndex,
+      event.currentIndex
+    );
+    if (event.previousIndex !== event.currentIndex) {
+      this.toggleUpdateNeeded();
+    }
   }
 
   toggleUpdateNeeded(): void {

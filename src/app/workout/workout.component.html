@@ -14,54 +14,57 @@
         required
       />
     </mat-form-field>
-    @for (exercise of workout.exercises; track $index; let index = $index) {
-    <div class="row">
-      <mat-form-field>
-        <mat-label>TITLE</mat-label>
-        <input
-          matInput
-          [(ngModel)]="exercise.title"
-          [name]="'exerciseTitle' + index"
-          type="text"
-          (ngModelChange)="toggleUpdateNeeded()"
-          minlength="2"
-          maxlength="50"
-          required
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>REPETITIONS</mat-label>
-        <input
-          matInput
-          [(ngModel)]="exercise.repetitions"
-          [name]="'repetitions' + index"
-          type="text"
-          (ngModelChange)="toggleUpdateNeeded()"
-          maxlength="20"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>PERFORMANCE</mat-label>
-        <input
-          matInput
-          [(ngModel)]="exercise.lastPerformance"
-          [name]="'lastPerformance' + index"
-          type="text"
-          (ngModelChange)="toggleUpdateNeeded()"
-          maxlength="20"
-        />
-      </mat-form-field>
-      <div class="delete-container">
-        <a
-          (click)="deleteExercise(index)"
-          class="delete"
-          title="Delete Exercise"
-        >
-          <i class="bx bx-x"></i>
-        </a>
+    <div class="exercises" cdkDropList (cdkDropListDropped)="drop($event)">
+      @for (exercise of workout.exercises; track $index; let index = $index) {
+      <div class="row" cdkDrag>
+        <i class="bx bx-menu" cdkDragHandle></i>
+        <mat-form-field>
+          <mat-label>TITLE</mat-label>
+          <input
+            matInput
+            [(ngModel)]="exercise.title"
+            [name]="'exerciseTitle' + index"
+            type="text"
+            (ngModelChange)="toggleUpdateNeeded()"
+            minlength="2"
+            maxlength="50"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>REPETITIONS</mat-label>
+          <input
+            matInput
+            [(ngModel)]="exercise.repetitions"
+            [name]="'repetitions' + index"
+            type="text"
+            (ngModelChange)="toggleUpdateNeeded()"
+            maxlength="20"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>PERFORMANCE</mat-label>
+          <input
+            matInput
+            [(ngModel)]="exercise.lastPerformance"
+            [name]="'lastPerformance' + index"
+            type="text"
+            (ngModelChange)="toggleUpdateNeeded()"
+            maxlength="20"
+          />
+        </mat-form-field>
+        <div class="delete-container">
+          <a
+            (click)="deleteExercise(index)"
+            class="delete"
+            title="Delete Exercise"
+          >
+            <i class="bx bx-x"></i>
+          </a>
+        </div>
       </div>
+      }
     </div>
-    }
     <div class="button-container">
       <a (click)="addExercise()" class="add" title="Add Exercise">
         <i class="bx bx-plus"></i>
