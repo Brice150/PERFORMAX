@@ -1,7 +1,11 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Timestamp } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -11,8 +15,6 @@ import { filter, Subject, take, takeUntil } from 'rxjs';
 import { Measure } from '../core/interfaces/measure';
 import { Progress } from '../core/interfaces/progress';
 import { ProgressService } from '../core/services/progress.service';
-import { Timestamp } from '@angular/fire/firestore';
-import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -23,7 +25,9 @@ import { ConfirmationDialogComponent } from '../shared/components/confirmation-d
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
   ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './progress.component.html',
   styleUrl: './progress.component.css',
 })
@@ -200,7 +204,9 @@ export class ProgressComponent implements OnInit, OnDestroy {
           measure.fat !== undefined &&
           measure.fat !== null &&
           measure.muscle !== undefined &&
-          measure.muscle !== null
+          measure.muscle !== null &&
+          measure.date !== undefined &&
+          measure.date !== null
       )
     ) {
       this.saveUserProgress('updated');
@@ -238,6 +244,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
 
   saveUserProgress(toastrMessage: string): void {
     this.loading = true;
+    this.progress.measures.sort((a, b) => a.date.getTime() - b.date.getTime());
     if (!this.progress.id) {
       this.progressService
         .addProgress(this.progress)

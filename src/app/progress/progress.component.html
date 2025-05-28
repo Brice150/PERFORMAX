@@ -62,6 +62,23 @@
           />
           <span matSuffix>%</span>
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>DATE</mat-label>
+          <input
+            matInput
+            [(ngModel)]="measure.date"
+            [matDatepicker]="picker"
+            [name]="'date' + index"
+            (ngModelChange)="toggleUpdateNeeded()"
+            required
+          />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
         <div class="delete-container">
           <a
             (click)="deleteMeasure(index)"

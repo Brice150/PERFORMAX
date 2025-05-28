@@ -10,6 +10,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 registerLocaleData(localeFr);
 
@@ -23,5 +24,6 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
   ],
 };

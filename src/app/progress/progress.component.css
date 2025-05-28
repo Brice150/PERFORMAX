@@ -229,6 +229,25 @@ mat-spinner {
   border-bottom-color: var(--accent) !important;
 }
 
+::ng-deep .mat-mdc-icon-button {
+  color: var(--accent) !important;
+}
+
+::ng-deep .mat-calendar-body-selected {
+  background-color: var(--accent) !important;
+}
+
+::ng-deep
+  .mat-calendar-body-today:not(.mat-calendar-body-selected):not(
+    .mat-calendar-body-comparison-identical
+  ) {
+  border-color: var(--accent) !important;
+}
+
+::ng-deep .mat-datepicker-content {
+  background-color: var(--background) !important;
+}
+
 ::ng-deep mat-form-field.mat-form-field-invalid {
   --secondary: red;
   --accent: red;
