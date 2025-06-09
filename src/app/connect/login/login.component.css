@@ -69,13 +69,11 @@ form .button-container a {
   border-radius: var(--light-radius);
   transition: 0.5s ease;
   width: 160px;
-  box-shadow: var(--box-shadow);
 }
 
 form .button-container a:hover {
   background-color: var(--accent);
   color: var(--primary);
-  box-shadow: var(--box-shadow-active);
 }
 
 form .button-container a i {
