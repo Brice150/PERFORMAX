@@ -101,7 +101,7 @@ mat-spinner {
 }
 
 ::ng-deep .mdc-text-field--filled {
-  background-color: var(--background-nav) !important;
+  background-color: var(--background) !important;
 }
 
 ::ng-deep
