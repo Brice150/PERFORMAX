@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import {
   Auth,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
   user,
@@ -47,6 +48,11 @@ export class UserService {
     const promise = signOut(this.auth);
     this.currentUserSig.set(null);
 
+    return from(promise);
+  }
+
+  passwordReset(email: string): Observable<void> {
+    const promise = sendPasswordResetEmail(this.auth, email);
     return from(promise);
   }
 }
