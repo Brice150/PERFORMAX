@@ -3,7 +3,7 @@
   --secondary: black;
   --accent: #38a95a;
   --background: #cbf0ed;
-  --box-shadow-color: rgba(0, 0, 0, 0.4);
+  --box-shadow-color: rgba(0, 0, 0, 0.15);
   --box-shadow: 0 1rem 3rem var(--box-shadow-color);
 
   --strong-radius: 20px;
