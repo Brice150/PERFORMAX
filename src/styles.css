@@ -1,8 +1,8 @@
 :root {
-  --primary: #e4e9f7;
+  --primary: white;
   --secondary: black;
   --accent: #38a95a;
-  --background: #e4e9f7;
+  --background: #cbf0ed;
   --box-shadow-color: rgba(0, 0, 0, 0.4);
   --box-shadow: 0 1rem 3rem var(--box-shadow-color);
 
