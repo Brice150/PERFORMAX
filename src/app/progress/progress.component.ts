@@ -94,15 +94,15 @@ export class ProgressComponent implements OnInit, OnDestroy {
           ),
           datasets: [
             {
-              label: 'Weight',
+              label: 'Weight (kg)',
               data: this.progress.measures.map((measure) => measure.weight),
             },
             {
-              label: 'Muscle',
+              label: 'Muscle (%)',
               data: this.progress.measures.map((measure) => measure.muscle),
             },
             {
-              label: 'Fat',
+              label: 'Fat (%)',
               data: this.progress.measures.map((measure) => measure.fat),
             },
           ],
@@ -176,9 +176,9 @@ export class ProgressComponent implements OnInit, OnDestroy {
     this.loading = true;
     const measure: Measure = {
       date: new Date(),
-      weight: 60,
-      fat: 10,
-      muscle: 45,
+      weight: 70,
+      fat: 20,
+      muscle: 73,
     };
     this.progress.measures.push(measure);
 
