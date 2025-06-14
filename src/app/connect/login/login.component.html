@@ -1,5 +1,9 @@
 @if (!loading) {
-<form [formGroup]="loginForm" [ngClass]="{ invalidLogin: invalidLogin }">
+<form
+  [formGroup]="loginForm"
+  [ngClass]="{ invalidLogin: invalidLogin }"
+  (ngSubmit)="login()"
+>
   <mat-form-field>
     <mat-label>Email</mat-label>
     <input matInput formControlName="email" />
@@ -43,13 +47,18 @@
     }
   </mat-form-field>
   <div class="button-container">
-    <a title="Forgot password ?" class="forgot" (click)="passwordForgotten()">
+    <button
+      title="Forgot password ?"
+      class="forgot"
+      (click)="passwordForgotten()"
+      type="button"
+    >
       <span class="text">Forgot password ?</span>
-    </a>
-    <a title="Login" (click)="login()">
+    </button>
+    <button title="Login" type="submit">
       <i class="bx bxs-log-in"></i>
       <span class="text">Login</span>
-    </a>
+    </button>
   </div>
 </form>
 } @else {
