@@ -23,6 +23,7 @@
         <mat-form-field>
           <mat-label>WEIGHT</mat-label>
           <input
+            appDisableScroll
             matInput
             [(ngModel)]="measure.weight"
             [name]="'weight' + index"
@@ -37,6 +38,7 @@
         <mat-form-field>
           <mat-label>MUSCLE</mat-label>
           <input
+            appDisableScroll
             matInput
             [(ngModel)]="measure.muscle"
             [name]="'muscle' + index"
@@ -51,6 +53,7 @@
         <mat-form-field>
           <mat-label>FAT</mat-label>
           <input
+            appDisableScroll
             matInput
             [(ngModel)]="measure.fat"
             [name]="'fat' + index"

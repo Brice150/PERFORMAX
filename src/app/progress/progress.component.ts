@@ -16,6 +16,7 @@ import { Measure } from '../core/interfaces/measure';
 import { Progress } from '../core/interfaces/progress';
 import { ProgressService } from '../core/services/progress.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { DisableScrollDirective } from '../shared/directives/disable-scroll.directive';
 
 @Component({
   selector: 'app-progress',
@@ -26,6 +27,7 @@ import { ConfirmationDialogComponent } from '../shared/components/confirmation-d
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
+    DisableScrollDirective,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './progress.component.html',
