@@ -7,7 +7,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -36,7 +36,7 @@ import { ConfirmationDialogComponent } from '../shared/components/confirmation-d
   templateUrl: './workout.component.html',
   styleUrl: './workout.component.css',
 })
-export class WorkoutComponent implements OnInit {
+export class WorkoutComponent implements OnInit, OnDestroy {
   updateNeeded: boolean = false;
   workout: Workout = {} as Workout;
   activatedRoute = inject(ActivatedRoute);
@@ -74,6 +74,11 @@ export class WorkoutComponent implements OnInit {
           }
         },
       });
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   drop(event: CdkDragDrop<string[]>) {
