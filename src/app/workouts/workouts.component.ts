@@ -8,10 +8,16 @@ import { Exercise } from '../core/interfaces/exercise';
 import { Workout } from '../core/interfaces/workout';
 import { WorkoutsService } from '../core/services/workouts.service';
 import { WorkoutCardComponent } from './workout-card/workout-card.component';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-workouts',
-  imports: [CommonModule, MatProgressSpinnerModule, WorkoutCardComponent],
+  imports: [
+    CommonModule,
+    MatProgressSpinnerModule,
+    WorkoutCardComponent,
+    RouterModule,
+  ],
   templateUrl: './workouts.component.html',
   styleUrl: './workouts.component.css',
 })
@@ -21,11 +27,12 @@ export class WorkoutsComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   workouts: Workout[] = [];
   toastr = inject(ToastrService);
+  router = inject(Router);
 
   ngOnInit(): void {
     this.workoutsService
       .getWorkouts()
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(takeUntil(this.destroyed$), take(1))
       .subscribe({
         next: (workouts: Workout[]) => {
           if (workouts?.length >= 0) {
@@ -68,9 +75,9 @@ export class WorkoutsComponent implements OnInit, OnDestroy {
       .addWorkout(workout)
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
-        next: () => {
-          this.workouts.push(workout);
+        next: (workoutId: string) => {
           this.loading = false;
+          this.router.navigate(['/workout/' + workoutId]);
           this.toastr.info('Workout added', 'Workouts', {
             positionClass: 'toast-bottom-center',
             toastClass: 'ngx-toastr custom info',
