@@ -1,21 +1,21 @@
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { UserService } from '../../core/services/user.service';
-import { Router, RouterModule } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { ToastrService } from 'ngx-toastr';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Subject, takeUntil } from 'rxjs';
+import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router, RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Subject, takeUntil } from 'rxjs';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -103,6 +103,32 @@ export class LoginComponent implements OnInit, OnDestroy {
     } else {
       this.loginForm.markAllAsTouched();
     }
+  }
+
+  loginWithGoogle(): void {
+    this.userService
+      .signInWithGoogle()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+          this.toastr.info('Welcome', 'Performax', {
+            positionClass: 'toast-bottom-center',
+            toastClass: 'ngx-toastr custom info',
+          });
+        },
+        error: (error: HttpErrorResponse) => {
+          if (
+            !error.message.includes('Missing or insufficient permissions.') &&
+            !error.message.includes('auth/popup-closed-by-user')
+          ) {
+            this.toastr.error(error.message, 'Login', {
+              positionClass: 'toast-bottom-center',
+              toastClass: 'ngx-toastr custom error',
+            });
+          }
+        },
+      });
   }
 
   passwordForgotten(): void {
