@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,5 +19,5 @@ import { Workout } from '../../core/interfaces/workout';
   styleUrl: './workout-card.component.css',
 })
 export class WorkoutCardComponent {
-  @Input() workout: Workout = {} as Workout;
+  readonly workout = input<Workout>({} as Workout);
 }
