@@ -18,7 +18,7 @@ nav {
   box-shadow: var(--box-shadow);
 }
 
-nav a {
+nav button {
   position: relative;
   display: flex;
   justify-content: center;
@@ -28,10 +28,11 @@ nav a {
   height: 60px;
   text-align: center;
   cursor: pointer;
-  text-decoration: none;
+  border: none;
+  background-color: var(--background-nav);
 }
 
-nav a i {
+nav button i {
   position: relative;
   display: flex;
   justify-content: center;
@@ -45,21 +46,21 @@ nav a i {
   color: var(--accent);
 }
 
-nav a.active i {
+nav button.active i {
   transform: translateY(-30px);
   background-color: var(--accent);
   color: var(--primary);
   box-shadow: var(--box-shadow-active);
 }
 
-nav a:hover i {
+nav button:hover i {
   transform: translateY(-30px);
   background-color: var(--accent);
   color: var(--primary);
   box-shadow: var(--box-shadow-active);
 }
 
-nav a .text {
+nav button .text {
   position: absolute;
   color: var(--accent);
   font-weight: 600;
@@ -68,14 +69,15 @@ nav a .text {
   transition: 0.5s ease;
   opacity: 0;
   transform: translateY(15px);
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-nav a.active .text {
+nav button.active .text {
   opacity: 1;
   transform: translateY(12px);
 }
 
-nav a:hover .text {
+nav button:hover .text {
   opacity: 1;
   transform: translateY(12px);
 }

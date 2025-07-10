@@ -1,18 +1,33 @@
 <nav>
-  <a routerLink="/workout" routerLinkActive="active" title="Workouts">
+  <button
+    routerLink="/workout"
+    routerLinkActive="active"
+    title="Workouts"
+    type="button"
+  >
     <span class="text">Workouts</span>
     <i class="bx bx-dumbbell"></i>
-  </a>
-  <a routerLink="/progress" routerLinkActive="active" title="Progress">
+  </button>
+  <button
+    routerLink="/progress"
+    routerLinkActive="active"
+    title="Progress"
+    type="button"
+  >
     <span class="text">Progress</span>
     <i class="bx bxs-bar-chart-alt-2"></i>
-  </a>
-  <a routerLink="/profile" routerLinkActive="active" title="Profile">
+  </button>
+  <button
+    routerLink="/profile"
+    routerLinkActive="active"
+    title="Profile"
+    type="button"
+  >
     <span class="text">Profile</span>
     <i class="bx bxs-user"></i>
-  </a>
-  <a (click)="logout()" title="Logout">
+  </button>
+  <button (click)="logout()" title="Logout" type="button">
     <span class="text">Logout</span>
     <i class="bx bxs-log-out"></i>
-  </a>
+  </button>
 </nav>
