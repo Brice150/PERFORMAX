@@ -21,6 +21,10 @@ section {
   border-radius: var(--light-radius);
 }
 
+section h1 {
+  margin-bottom: 5px;
+}
+
 section .content {
   padding: 30px 0;
   display: flex;
