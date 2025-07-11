@@ -4,29 +4,36 @@
   </div>
   @if (isRegistering || isLogin) {
   <div class="back-container">
-    <a (click)="toggleLoginOrRegister('welcome')" title="Back" class="unactive">
+    <button
+      type="button"
+      (click)="toggleLoginOrRegister('welcome')"
+      title="Back"
+      class="unactive"
+    >
       <i class="bx bxs-left-arrow-circle"></i>
       <span class="text">Back</span>
-    </a>
+    </button>
   </div>
   }
   <div class="button-container">
-    <a
+    <button
+      type="button"
       (click)="toggleLoginOrRegister('register')"
       title="Register"
       [ngClass]="isRegistering ? 'active' : 'unactive'"
     >
       <i class="bx bx-pencil"></i>
       <span class="text">Register</span>
-    </a>
-    <a
+    </button>
+    <button
+      type="button"
       (click)="toggleLoginOrRegister('login')"
       title="Login"
       [ngClass]="isLogin ? 'active' : 'unactive'"
     >
       <i class="bx bx-user-circle"></i>
       <span class="text">Login</span>
-    </a>
+    </button>
   </div>
   <div class="content">
     @if(!isRegistering && !isLogin) {

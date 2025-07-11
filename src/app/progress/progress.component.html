@@ -84,25 +84,35 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <div class="delete-container">
-          <a
+          <button
             (click)="deleteMeasure(index)"
             class="delete"
             title="Delete Measure"
           >
             <i class="bx bx-x"></i>
-          </a>
+          </button>
         </div>
       </div>
       }
     </form>
     <div class="button-container">
-      <a (click)="addProgress()" class="add" title="Add Measure">
+      <button
+        type="button"
+        (click)="addProgress()"
+        class="add"
+        title="Add Measure"
+      >
         <i class="bx bx-plus"></i>
-      </a>
+      </button>
       @if(updateNeeded) {
-      <a (click)="updateProgress()" class="update" title="Update Measures">
+      <button
+        type="button"
+        (click)="updateProgress()"
+        class="update"
+        title="Update Measures"
+      >
         <i class="bx bx-check"></i>
-      </a>
+      </button>
       }
     </div>
   </div>

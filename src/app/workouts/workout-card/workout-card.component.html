@@ -1,4 +1,9 @@
-<a class="workout" [routerLink]="'/workout/' + workout().id" title="Edit workout">
+<button
+  type="button"
+  class="workout"
+  [routerLink]="'/workout/' + workout().id"
+  title="Edit workout"
+>
   <div class="title">
     <i class="bx bx-run"></i>
     <span>{{ workout().title }}</span>
@@ -11,4 +16,4 @@
     <span class="small">{{ exercise.lastPerformance }}</span>
   </div>
   }
-</a>
+</button>

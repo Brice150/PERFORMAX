@@ -60,6 +60,8 @@ section .content .delete {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
+  background-color: var(--primary);
 }
 
 section .content .button-container .delete {
@@ -89,7 +91,6 @@ section .button-container {
 }
 
 section .add {
-  text-decoration: none;
   cursor: pointer;
   transition: 0.5s ease;
   box-shadow: var(--box-shadow);
@@ -99,6 +100,8 @@ section .add {
   justify-content: center;
   align-items: center;
   margin: 10px;
+  border: none;
+  background-color: var(--primary);
 }
 
 section .add i {
@@ -112,7 +115,6 @@ section .add:hover {
 }
 
 section .update {
-  text-decoration: none;
   cursor: pointer;
   transition: 0.5s ease;
   box-shadow: var(--box-shadow);
@@ -122,6 +124,8 @@ section .update {
   justify-content: center;
   align-items: center;
   margin: 10px;
+  border: none;
+  background-color: var(--primary);
 }
 
 section .update i {

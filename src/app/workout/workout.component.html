@@ -54,28 +54,43 @@
           />
         </mat-form-field>
         <div class="delete-container">
-          <a
+          <button
             (click)="deleteExercise(index)"
             class="delete"
             title="Delete Exercise"
           >
             <i class="bx bx-x"></i>
-          </a>
+          </button>
         </div>
       </div>
       }
     </div>
     <div class="button-container">
-      <a (click)="addExercise()" class="add" title="Add Exercise">
+      <button
+        type="button"
+        (click)="addExercise()"
+        class="add"
+        title="Add Exercise"
+      >
         <i class="bx bx-plus"></i>
-      </a>
-      <a (click)="deleteWorkout()" class="delete" title="Delete Workout">
+      </button>
+      <button
+        type="button"
+        (click)="deleteWorkout()"
+        class="delete"
+        title="Delete Workout"
+      >
         <i class="bx bx-x"></i>
-      </a>
+      </button>
       @if(updateNeeded) {
-      <a (click)="updateWorkout()" class="update" title="Update Workout">
+      <button
+        type="button"
+        (click)="updateWorkout()"
+        class="update"
+        title="Update Workout"
+      >
         <i class="bx bx-check"></i>
-      </a>
+      </button>
       }
     </div>
   </form>

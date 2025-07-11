@@ -16,10 +16,11 @@
   width: 100%;
   box-shadow: var(--box-shadow);
   border-radius: var(--light-radius);
-  text-decoration: none;
   color: var(--accent);
   cursor: pointer;
   transition: 0.5s ease;
+  border: none;
+  background-color: var(--primary);
 }
 
 .workout:hover {
@@ -43,6 +44,7 @@
 .workout .title span {
   font-size: 20px;
   font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .workout .exercise {
@@ -63,6 +65,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .workout .exercise span.small {

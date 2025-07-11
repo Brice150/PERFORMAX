@@ -7,9 +7,14 @@
       <app-workout-card [workout]="workout"></app-workout-card>
       }
     </div>
-    <a (click)="addWorkout()" class="add" title="Add Workout">
+    <button
+      type="button"
+      (click)="addWorkout()"
+      class="add"
+      title="Add Workout"
+    >
       <i class="bx bx-plus"></i>
-    </a>
+    </button>
   </div>
   }
 </section>
