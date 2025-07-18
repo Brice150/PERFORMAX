@@ -1,7 +1,6 @@
-import { CommonModule, Location } from '@angular/common';
-import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,9 +9,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  router = inject(Router);
-  location = inject(Location);
-  toastr = inject(ToastrService);
   @Output() logoutEvent = new EventEmitter<void>();
 
   logout(): void {
