@@ -50,14 +50,12 @@ nav button.active i {
   transform: translateY(-30px);
   background-color: var(--accent);
   color: var(--primary);
-  box-shadow: var(--box-shadow-active);
 }
 
 nav button:hover i {
   transform: translateY(-30px);
   background-color: var(--accent);
   color: var(--primary);
-  box-shadow: var(--box-shadow-active);
 }
 
 nav button .text {

@@ -101,7 +101,6 @@ section form .delete i {
 section form .delete:hover {
   color: var(--primary);
   background-color: red;
-  box-shadow: var(--box-shadow-active-red);
 }
 
 section .button-container {
@@ -132,7 +131,6 @@ section .add i {
 section .add:hover {
   color: var(--primary);
   background-color: var(--accent);
-  box-shadow: var(--box-shadow-active);
 }
 
 section .update {
@@ -156,7 +154,6 @@ section .update i {
 section .update:hover {
   color: var(--primary);
   background-color: var(--secondary);
-  box-shadow: var(--box-shadow-active-secondary);
 }
 
 section form input {

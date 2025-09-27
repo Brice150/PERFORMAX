@@ -26,7 +26,6 @@
 .workout:hover {
   background-color: var(--accent);
   color: var(--primary);
-  box-shadow: var(--box-shadow-active);
 }
 
 .workout .title {

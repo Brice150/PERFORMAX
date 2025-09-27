@@ -52,12 +52,10 @@ section .button-container .delete {
 section .button-container button:hover {
   background-color: var(--accent);
   color: var(--primary);
-  box-shadow: var(--box-shadow-active);
 }
 
 section .button-container .delete:hover {
   background-color: red;
-  box-shadow: var(--box-shadow-active-red);
 }
 
 section .button-container button i {
