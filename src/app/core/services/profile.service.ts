@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { deleteUser, updatePassword } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
-import { UserService } from './user.service';
 import { User } from '../interfaces/user';
+import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {

@@ -1,28 +1,75 @@
-:host {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 section {
-  position: relative;
-  margin: 20px 0;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--primary);
+  padding: 10px;
+  border-radius: var(--light-radius);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
-  width: 95%;
-  max-width: 1200px;
-  background-color: var(--primary);
-  color: var(--accent);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--light-radius);
+  max-width: 700px;
+  width: 80%;
 }
 
 section h1 {
-  margin-bottom: 5px;
+  font-size: 20px;
+  color: var(--accent);
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.button-container button {
+  cursor: pointer;
+  color: var(--accent);
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: var(--light-radius);
+  transition: 0.5s ease;
+  width: 150px;
+  border: none;
+  background-color: var(--primary);
+  box-shadow: var(--box-shadow);
+}
+
+section .button-container .delete {
+  color: red;
+  transition: 0.5s ease;
+}
+
+section .button-container button:hover {
+  background-color: var(--accent);
+  color: var(--primary);
+  box-shadow: var(--box-shadow-active);
+}
+
+section .button-container .delete:hover {
+  background-color: red;
+  box-shadow: var(--box-shadow-active-red);
+}
+
+section .button-container button i {
+  font-size: 40px;
+}
+
+section .button-container button .text {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 section .content {
@@ -31,8 +78,9 @@ section .content {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 70%;
+  width: 90%;
   gap: 20px;
+  max-width: 350px;
 }
 
 section .content mat-form-field {
@@ -49,70 +97,6 @@ section .content mat-form-field mat-error span {
 
 .mat-icon {
   color: var(--accent);
-}
-
-section .button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-section .button-container button {
-  cursor: pointer;
-  color: var(--accent);
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border-radius: var(--light-radius);
-  box-shadow: var(--box-shadow);
-  transition: 0.5s ease;
-  width: 140px;
-  border: none;
-  background-color: var(--primary);
-}
-
-section .button-container .delete {
-  color: red;
-  transition: 0.5s ease;
-  width: 200px;
-}
-
-section .button-container button:hover {
-  background-color: var(--accent);
-  color: var(--primary);
-  box-shadow: var(--box-shadow-active);
-}
-
-section .button-container .delete:hover {
-  background-color: red;
-  box-shadow: var(--box-shadow-active-red);
-}
-
-section .button-container button i {
-  font-size: 30px;
-}
-
-section .button-container button .text {
-  font-size: 20px;
-  font-weight: 500;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-mat-spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-::ng-deep .mdc-circular-progress__indeterminate-circle-graphic {
-  stroke: var(--accent) !important;
 }
 
 ::ng-deep
