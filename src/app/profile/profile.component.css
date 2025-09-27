@@ -35,22 +35,6 @@ section .content {
   gap: 20px;
 }
 
-section .content mat-form-field {
-  width: 100%;
-}
-
-section .content mat-form-field mat-error {
-  margin-top: 2px;
-}
-
-section .content mat-form-field mat-error span {
-  font-size: 16px;
-}
-
-.mat-icon {
-  color: var(--accent);
-}
-
 section .button-container {
   display: flex;
   justify-content: center;
