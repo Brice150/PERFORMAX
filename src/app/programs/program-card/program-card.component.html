@@ -1,0 +1,25 @@
+<div class="program">
+  <div class="delete-container">
+    <button (click)="delete()" class="delete" title="Delete">
+      <i class="bx bx-x"></i>
+    </button>
+  </div>
+  <div class="title">
+    <i class="bx bx-run"></i>
+    <span>{{ program().title }}</span>
+  </div>
+  @for (session of program().sessions; track $index) {
+  <div class="session">
+    <span class="large">{{ session.title }}</span>
+  </div>
+  }
+  <button
+    type="button"
+    [routerLink]="'/programs/' + program().id"
+    class="view"
+    title="Details"
+  >
+    <i class="bx bxs-search-alt-2"></i>
+    <span class="text">Details</span>
+  </button>
+</div>

@@ -1,10 +1,14 @@
 <section>
-  <h1>Sessions</h1>
+  <h1>{{ program.title }}</h1>
   @if (!loading) {
   <div class="content">
     <div class="sessions">
-      @for (session of sessions; track $index; let index = $index) {
-      <app-session-card [session]="session"></app-session-card>
+      @for (session of program.sessions; track $index; let index = $index) {
+      <app-session-card
+        [session]="session"
+        (updateSessionEvent)="updateSession(session, index)"
+        (deleteSessionEvent)="deleteSession(index)"
+      ></app-session-card>
       }
     </div>
     <button

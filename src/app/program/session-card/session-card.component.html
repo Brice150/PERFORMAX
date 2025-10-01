@@ -1,0 +1,23 @@
+<div class="session">
+  <div class="delete-container">
+    <button (click)="delete()" class="delete" title="Delete">
+      <i class="bx bx-x"></i>
+    </button>
+  </div>
+  <div class="title">
+    <i class="bx bx-run"></i>
+    <span>{{ session().title }}</span>
+  </div>
+  @for (exercise of session().exercises; track $index) {
+  <div class="exercise">
+    <i class="bx bx-right-arrow-alt"></i>
+    <span class="large">{{ exercise.title }}</span>
+    <span class="small">{{ exercise.repetitions }}</span>
+    <span class="small">{{ exercise.lastPerformance }}</span>
+  </div>
+  }
+  <button type="button" class="view" title="Update" (click)="update()">
+    <i class="bx bxs-edit-alt"></i>
+    <span class="text">Update</span>
+  </button>
+</div>

@@ -18,10 +18,11 @@ Backend/Database : Firebase
 - Login with failure animation for bad credentials
 - Logout is available on menu once logged in
 
-### Sessions
+### Programs
 
-- View your sessions
-- Add, modify or delete a session
+- View your programs
+- Add, modify or delete a program
+- Add, modify or delete a session inside a program
 
 ### Progress
 
