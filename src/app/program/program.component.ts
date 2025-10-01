@@ -78,7 +78,7 @@ export class ProgramComponent implements OnInit, OnDestroy {
     };
 
     const session: Session = {
-      title: 'Session 1',
+      title: 'Session ' + (this.program.sessions.length + 1),
       exercises: [exercise],
     };
 

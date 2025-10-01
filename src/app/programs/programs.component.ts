@@ -39,7 +39,9 @@ export class ProgramsComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (programs: Program[]) => {
           if (programs?.length > 0) {
-            this.programs = programs;
+            this.programs = programs.sort(
+              (a, b) => (a.date as any).seconds - (b.date as any).seconds
+            );
           }
           this.loading = false;
         },
@@ -75,7 +77,8 @@ export class ProgramsComponent implements OnInit, OnDestroy {
     };
 
     const program: Program = {
-      title: 'Program 1',
+      title: 'Program ' + (this.programs.length + 1),
+      date: new Date(),
       sessions: [session],
     };
 

@@ -55,7 +55,7 @@ export class SessionDialogComponent implements OnInit {
 
   addExercise(): void {
     const exercise: Exercise = {
-      title: 'Exercise 1',
+      title: 'Exercise ' + (this.session.exercises.length + 1),
       repetitions: '4x10',
       lastPerformance: '20 kg',
     };
