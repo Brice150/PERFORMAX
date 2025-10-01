@@ -62,8 +62,6 @@ section form {
   box-shadow: var(--box-shadow);
   border-radius: var(--light-radius);
   padding: 0 10px;
-  max-height: 480px;
-  overflow-y: auto;
 }
 
 section form .row {
@@ -264,11 +262,6 @@ mat-spinner {
 }
 
 @media screen and (max-width: 740px) {
-  section form {
-    max-height: none;
-    overflow-y: hidden;
-  }
-
   .graph {
     height: 400px;
   }

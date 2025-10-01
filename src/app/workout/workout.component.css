@@ -28,8 +28,6 @@ section .content {
   flex-direction: column;
   margin-top: 10px;
   padding: 0 10px;
-  max-height: 480px;
-  overflow-y: auto;
 }
 
 section .content .title {
@@ -186,11 +184,6 @@ mat-spinner {
 }
 
 @media screen and (max-width: 740px) {
-  section .content {
-    max-height: none;
-    overflow-y: hidden;
-  }
-
   section .delete-container {
     width: 210px;
   }
