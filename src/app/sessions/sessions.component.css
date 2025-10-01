@@ -33,7 +33,7 @@ section .content {
   width: 100%;
 }
 
-section .content .workouts {
+section .content .sessions {
   display: flex;
   justify-content: space-evenly;
   align-items: center;

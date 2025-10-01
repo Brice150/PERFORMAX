@@ -17,12 +17,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter, Subject, switchMap, take, takeUntil } from 'rxjs';
 import { Exercise } from '../core/interfaces/exercise';
-import { Workout } from '../core/interfaces/workout';
-import { WorkoutsService } from '../core/services/workouts.service';
+import { Session } from '../core/interfaces/session';
+import { SessionsService } from '../core/services/sessions.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-workout',
+  selector: 'app-session',
   imports: [
     CommonModule,
     FormsModule,
@@ -33,14 +33,14 @@ import { ConfirmationDialogComponent } from '../shared/components/confirmation-d
     CdkDrag,
     CdkDragHandle,
   ],
-  templateUrl: './workout.component.html',
-  styleUrl: './workout.component.css',
+  templateUrl: './session.component.html',
+  styleUrl: './session.component.css',
 })
-export class WorkoutComponent implements OnInit, OnDestroy {
+export class SessionComponent implements OnInit, OnDestroy {
   updateNeeded: boolean = false;
-  workout: Workout = {} as Workout;
+  session: Session = {} as Session;
   activatedRoute = inject(ActivatedRoute);
-  workoutsService = inject(WorkoutsService);
+  sessionsService = inject(SessionsService);
   router = inject(Router);
   destroyed$ = new Subject<void>();
   loading: boolean = true;
@@ -52,22 +52,22 @@ export class WorkoutComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroyed$),
         switchMap((params) => {
-          const workoutId = params['id'];
-          return this.workoutsService.getWorkout(workoutId);
+          const sessionId = params['id'];
+          return this.sessionsService.getSession(sessionId);
         }),
         take(1)
       )
       .subscribe({
-        next: (workout: Workout | null) => {
-          if (workout) {
-            this.workout = workout;
+        next: (session: Session | null) => {
+          if (session) {
+            this.session = session;
           }
           this.loading = false;
         },
         error: (error: HttpErrorResponse) => {
           this.loading = false;
           if (!error.message.includes('Missing or insufficient permissions.')) {
-            this.toastr.error(error.message, 'Workout', {
+            this.toastr.error(error.message, 'Session', {
               positionClass: 'toast-bottom-center',
               toastClass: 'ngx-toastr custom error',
             });
@@ -83,7 +83,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(
-      this.workout.exercises,
+      this.session.exercises,
       event.previousIndex,
       event.currentIndex
     );
@@ -103,20 +103,20 @@ export class WorkoutComponent implements OnInit, OnDestroy {
       lastPerformance: '20 kg',
     };
 
-    this.workout.exercises.push(exercise);
-    this.updateWorkout();
+    this.session.exercises.push(exercise);
+    this.updateSession();
   }
 
   deleteExercise(index: number): void {
-    this.workout.exercises.splice(index, 1);
-    this.updateWorkout();
+    this.session.exercises.splice(index, 1);
+    this.updateSession();
   }
 
-  updateWorkout(): void {
+  updateSession(): void {
     if (
-      this.workout.title.length >= 2 &&
-      this.workout.title.length <= 50 &&
-      !this.workout.exercises.some(
+      this.session.title.length >= 2 &&
+      this.session.title.length <= 50 &&
+      !this.session.exercises.some(
         (measure) =>
           measure.title.length < 2 ||
           measure.title.length > 50 ||
@@ -126,14 +126,14 @@ export class WorkoutComponent implements OnInit, OnDestroy {
     ) {
       this.loading = true;
 
-      this.workoutsService
-        .updateWorkout(this.workout)
+      this.sessionsService
+        .updateSession(this.session)
         .pipe(takeUntil(this.destroyed$))
         .subscribe({
           next: () => {
             this.updateNeeded = false;
             this.loading = false;
-            this.toastr.info('Workout updated', 'Workout', {
+            this.toastr.info('Session updated', 'Session', {
               positionClass: 'toast-bottom-center',
               toastClass: 'ngx-toastr custom info',
             });
@@ -143,7 +143,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
             if (
               !error.message.includes('Missing or insufficient permissions.')
             ) {
-              this.toastr.error(error.message, 'Workout', {
+              this.toastr.error(error.message, 'Session', {
                 positionClass: 'toast-bottom-center',
                 toastClass: 'ngx-toastr custom error',
               });
@@ -151,16 +151,16 @@ export class WorkoutComponent implements OnInit, OnDestroy {
           },
         });
     } else {
-      this.toastr.info('Invalid workout', 'Workout', {
+      this.toastr.info('Invalid session', 'Session', {
         positionClass: 'toast-bottom-center',
         toastClass: 'ngx-toastr custom error',
       });
     }
   }
 
-  deleteWorkout(): void {
+  deleteSession(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: 'delete this workout',
+      data: 'delete this session',
     });
 
     dialogRef
@@ -169,15 +169,15 @@ export class WorkoutComponent implements OnInit, OnDestroy {
         filter((res: boolean) => res),
         switchMap(() => {
           this.loading = true;
-          return this.workoutsService.deleteWorkout(this.workout.id!);
+          return this.sessionsService.deleteSession(this.session.id!);
         }),
         takeUntil(this.destroyed$)
       )
       .subscribe({
         next: () => {
-          this.router.navigate(['/workout']);
+          this.router.navigate(['/session']);
           this.loading = false;
-          this.toastr.info('Workout deleted', 'Workout', {
+          this.toastr.info('Session deleted', 'Session', {
             positionClass: 'toast-bottom-center',
             toastClass: 'ngx-toastr custom info',
           });
@@ -185,7 +185,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
         error: (error: HttpErrorResponse) => {
           this.loading = false;
           if (!error.message.includes('Missing or insufficient permissions.')) {
-            this.toastr.error(error.message, 'Workout', {
+            this.toastr.error(error.message, 'Session', {
               positionClass: 'toast-bottom-center',
               toastClass: 'ngx-toastr custom error',
             });

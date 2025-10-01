@@ -1,14 +1,14 @@
 <button
   type="button"
-  class="workout"
-  [routerLink]="'/workout/' + workout().id"
-  title="Edit workout"
+  class="session"
+  [routerLink]="'/session/' + session().id"
+  title="Edit Session"
 >
   <div class="title">
     <i class="bx bx-run"></i>
-    <span>{{ workout().title }}</span>
+    <span>{{ session().title }}</span>
   </div>
-  @for (exercise of workout().exercises; track $index; let index = $index) {
+  @for (exercise of session().exercises; track $index; let index = $index) {
   <div class="exercise">
     <i class="bx bx-right-arrow-alt"></i>
     <span class="large">{{ exercise.title }}</span>

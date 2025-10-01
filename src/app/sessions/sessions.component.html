@@ -1,17 +1,17 @@
 <section>
-  <h1>Workouts</h1>
+  <h1>Sessions</h1>
   @if (!loading) {
   <div class="content">
-    <div class="workouts">
-      @for (workout of workouts; track $index; let index = $index) {
-      <app-workout-card [workout]="workout"></app-workout-card>
+    <div class="sessions">
+      @for (session of sessions; track $index; let index = $index) {
+      <app-session-card [session]="session"></app-session-card>
       }
     </div>
     <button
       type="button"
-      (click)="addWorkout()"
+      (click)="addSession()"
       class="add"
-      title="Add Workout"
+      title="Add Session"
     >
       <i class="bx bx-plus"></i>
     </button>

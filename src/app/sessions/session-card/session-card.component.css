@@ -6,7 +6,7 @@
   max-width: 320px;
 }
 
-.workout {
+.session {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,12 +23,12 @@
   background-color: var(--primary);
 }
 
-.workout:hover {
+.session:hover {
   background-color: var(--accent);
   color: var(--primary);
 }
 
-.workout .title {
+.session .title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,17 +36,17 @@
   margin-bottom: 10px;
 }
 
-.workout .title i {
+.session .title i {
   font-size: 30px;
 }
 
-.workout .title span {
+.session .title span {
   font-size: 20px;
   font-weight: 500;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.workout .exercise {
+.session .exercise {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,12 +54,12 @@
   color: var(--secondary);
 }
 
-.workout .exercise i {
+.session .exercise i {
   font-size: 20px;
   padding: 5px 0;
 }
 
-.workout .exercise span {
+.session .exercise span {
   font-size: 15px;
   overflow: hidden;
   white-space: nowrap;
@@ -67,13 +67,13 @@
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.workout .exercise span.small {
+.session .exercise span.small {
   width: 50px;
   text-align: center;
   font-weight: 400;
 }
 
-.workout .exercise span.large {
+.session .exercise span.large {
   width: 150px;
   text-align: left;
   font-weight: 500;

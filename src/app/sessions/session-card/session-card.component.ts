@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
-import { Workout } from '../../core/interfaces/workout';
+import { Session } from '../../core/interfaces/session';
 
 @Component({
-  selector: 'app-workout-card',
+  selector: 'app-session-card',
   imports: [
     CommonModule,
     FormsModule,
@@ -15,9 +15,9 @@ import { Workout } from '../../core/interfaces/workout';
     MatInputModule,
     RouterModule,
   ],
-  templateUrl: './workout-card.component.html',
-  styleUrl: './workout-card.component.css',
+  templateUrl: './session-card.component.html',
+  styleUrl: './session-card.component.css',
 })
-export class WorkoutCardComponent {
-  readonly workout = input<Workout>({} as Workout);
+export class SessionCardComponent {
+  readonly session = input<Session>({} as Session);
 }

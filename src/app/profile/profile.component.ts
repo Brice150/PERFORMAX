@@ -10,7 +10,7 @@ import { User } from '../core/interfaces/user';
 import { ProfileService } from '../core/services/profile.service';
 import { ProgressService } from '../core/services/progress.service';
 import { UserService } from '../core/services/user.service';
-import { WorkoutsService } from '../core/services/workouts.service';
+import { SessionsService } from '../core/services/sessions.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { SecurityDialogComponent } from '../shared/components/security-dialog/security-dialog.component';
 import { SecurityComponent } from './security/security.component';
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnDestroy {
   toastr = inject(ToastrService);
   profileService = inject(ProfileService);
   userService = inject(UserService);
-  workoutsService = inject(WorkoutsService);
+  sessionsService = inject(SessionsService);
   progressService = inject(ProgressService);
   dialog = inject(MatDialog);
   router = inject(Router);
@@ -96,7 +96,7 @@ export class ProfileComponent implements OnDestroy {
         filter((res: boolean) => res),
         switchMap(() => {
           this.loading = true;
-          return this.workoutsService.deleteUserWorkouts();
+          return this.sessionsService.deleteUserSessions();
         }),
         switchMap(() => this.progressService.deleteUserProgress()),
         switchMap(() =>

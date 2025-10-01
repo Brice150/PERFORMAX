@@ -1,6 +1,6 @@
 import { Exercise } from './exercise';
 
-export interface Workout {
+export interface Session {
   id?: string;
   title: string;
   exercises: Exercise[];

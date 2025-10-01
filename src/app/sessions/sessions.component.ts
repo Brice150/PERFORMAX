@@ -2,48 +2,48 @@ import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, take, takeUntil } from 'rxjs';
 import { Exercise } from '../core/interfaces/exercise';
-import { Workout } from '../core/interfaces/workout';
-import { WorkoutsService } from '../core/services/workouts.service';
-import { WorkoutCardComponent } from './workout-card/workout-card.component';
-import { Router, RouterModule } from '@angular/router';
+import { Session } from '../core/interfaces/session';
+import { SessionsService } from '../core/services/sessions.service';
+import { SessionCardComponent } from './session-card/session-card.component';
 
 @Component({
-  selector: 'app-workouts',
+  selector: 'app-sessions',
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
-    WorkoutCardComponent,
+    SessionCardComponent,
     RouterModule,
   ],
-  templateUrl: './workouts.component.html',
-  styleUrl: './workouts.component.css',
+  templateUrl: './sessions.component.html',
+  styleUrl: './sessions.component.css',
 })
-export class WorkoutsComponent implements OnInit, OnDestroy {
-  workoutsService = inject(WorkoutsService);
+export class SessionsComponent implements OnInit, OnDestroy {
+  sessionsService = inject(SessionsService);
   destroyed$ = new Subject<void>();
   loading: boolean = true;
-  workouts: Workout[] = [];
+  sessions: Session[] = [];
   toastr = inject(ToastrService);
   router = inject(Router);
 
   ngOnInit(): void {
-    this.workoutsService
-      .getWorkouts()
+    this.sessionsService
+      .getSessions()
       .pipe(takeUntil(this.destroyed$), take(1))
       .subscribe({
-        next: (workouts: Workout[]) => {
-          if (workouts?.length >= 0) {
-            this.workouts = workouts;
+        next: (sessions: Session[]) => {
+          if (sessions?.length >= 0) {
+            this.sessions = sessions;
           }
           this.loading = false;
         },
         error: (error: HttpErrorResponse) => {
           this.loading = false;
           if (!error.message.includes('Missing or insufficient permissions.')) {
-            this.toastr.error(error.message, 'Workouts', {
+            this.toastr.error(error.message, 'Sessions', {
               positionClass: 'toast-bottom-center',
               toastClass: 'ngx-toastr custom error',
             });
@@ -57,7 +57,7 @@ export class WorkoutsComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  addWorkout(): void {
+  addSession(): void {
     this.loading = true;
 
     const exercise: Exercise = {
@@ -66,19 +66,19 @@ export class WorkoutsComponent implements OnInit, OnDestroy {
       lastPerformance: '20 kg',
     };
 
-    const workout: Workout = {
-      title: 'Workout',
+    const session: Session = {
+      title: 'Session 1',
       exercises: [exercise],
     };
 
-    this.workoutsService
-      .addWorkout(workout)
+    this.sessionsService
+      .addSession(session)
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
-        next: (workoutId: string) => {
+        next: (sessionId: string) => {
           this.loading = false;
-          this.router.navigate(['/workout/' + workoutId]);
-          this.toastr.info('Workout added', 'Workouts', {
+          this.router.navigate(['/session/' + sessionId]);
+          this.toastr.info('Session added', 'Sessions', {
             positionClass: 'toast-bottom-center',
             toastClass: 'ngx-toastr custom info',
           });
@@ -86,7 +86,7 @@ export class WorkoutsComponent implements OnInit, OnDestroy {
         error: (error: HttpErrorResponse) => {
           this.loading = false;
           if (!error.message.includes('Missing or insufficient permissions.')) {
-            this.toastr.error(error.message, 'Workouts', {
+            this.toastr.error(error.message, 'Sessions', {
               positionClass: 'toast-bottom-center',
               toastClass: 'ngx-toastr custom error',
             });
