@@ -21,8 +21,20 @@ section {
   border-radius: var(--light-radius);
 }
 
-section h1 {
+section .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 5px;
+}
+
+section .title i {
+  font-size: 40px;
+}
+
+section .title h1 {
+  text-transform: capitalize;
 }
 
 section .content {

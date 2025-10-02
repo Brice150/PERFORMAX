@@ -10,7 +10,6 @@
     </button>
   </div>
   <div class="title">
-    <i [ngClass]="logo()"></i>
     <span>{{ session().title }}</span>
   </div>
   @for (exercise of session().exercises; track $index) {

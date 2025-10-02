@@ -1,5 +1,8 @@
 <section>
-  <h1>{{ program.title }}</h1>
+  <div class="title">
+    <i [ngClass]="program.logo"></i>
+    <h1>{{ program.title }}</h1>
+  </div>
   @if (!loading) {
   <div class="content">
     <div class="sessions">
