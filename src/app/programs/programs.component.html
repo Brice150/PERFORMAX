@@ -6,6 +6,7 @@
       @for (program of programs; track $index) {
       <app-program-card
         [program]="program"
+        (updateProgramEvent)="updateProgram(program)"
         (deleteProgramEvent)="deleteProgram(program.id!)"
       ></app-program-card>
       }

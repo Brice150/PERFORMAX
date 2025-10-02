@@ -1,11 +1,16 @@
 <div class="program">
+  <div class="update-container">
+    <button (click)="update()" class="update" title="Update">
+      <i class="bx bxs-edit-alt"></i>
+    </button>
+  </div>
   <div class="delete-container">
     <button (click)="delete()" class="delete" title="Delete">
       <i class="bx bx-x"></i>
     </button>
   </div>
   <div class="title">
-    <i class="bx bx-run"></i>
+    <i [ngClass]="program().logo"></i>
     <span>{{ program().title }}</span>
   </div>
   @for (session of program().sessions; track $index) {

@@ -12,6 +12,7 @@ import { Session } from '../core/interfaces/session';
 import { ProgramsService } from '../core/services/programs.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ProgramCardComponent } from './program-card/program-card.component';
+import { ProgramDialogComponent } from '../shared/components/program-dialog/program-dialog.component';
 
 @Component({
   selector: 'app-programs',
@@ -77,6 +78,7 @@ export class ProgramsComponent implements OnInit, OnDestroy {
     };
 
     const program: Program = {
+      logo: 'bx bx-dumbbell',
       title: 'Program ' + (this.programs.length + 1),
       date: new Date(),
       sessions: [session],
@@ -127,6 +129,41 @@ export class ProgramsComponent implements OnInit, OnDestroy {
           );
           this.loading = false;
           this.toastr.info('Program deleted', 'Programs', {
+            positionClass: 'toast-bottom-center',
+            toastClass: 'ngx-toastr custom info',
+          });
+        },
+        error: (error: HttpErrorResponse) => {
+          this.loading = false;
+          if (!error.message.includes('Missing or insufficient permissions.')) {
+            this.toastr.error(error.message, 'Programs', {
+              positionClass: 'toast-bottom-center',
+              toastClass: 'ngx-toastr custom error',
+            });
+          }
+        },
+      });
+  }
+
+  updateProgram(program: Program): void {
+    const dialogRef = this.dialog.open(ProgramDialogComponent, {
+      data: structuredClone(program),
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        filter((res) => !!res),
+        switchMap((res: Program) => {
+          this.loading = true;
+          return this.programsService.updateProgram(res);
+        }),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe({
+        next: () => {
+          this.loading = false;
+          this.toastr.info('Program updated', 'Programs', {
             positionClass: 'toast-bottom-center',
             toastClass: 'ngx-toastr custom info',
           });

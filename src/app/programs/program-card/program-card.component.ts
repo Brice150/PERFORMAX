@@ -11,7 +11,12 @@ import { Program } from '../../core/interfaces/program';
 })
 export class ProgramCardComponent {
   readonly program = input.required<Program>();
+  @Output() updateProgramEvent = new EventEmitter<void>();
   @Output() deleteProgramEvent = new EventEmitter<void>();
+
+  update() {
+    this.updateProgramEvent.emit();
+  }
 
   delete(): void {
     this.deleteProgramEvent.emit();

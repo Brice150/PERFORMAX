@@ -1,11 +1,16 @@
 <div class="session">
+  <div class="update-container">
+    <button (click)="update()" class="update" title="Update">
+      <i class="bx bxs-edit-alt"></i>
+    </button>
+  </div>
   <div class="delete-container">
     <button (click)="delete()" class="delete" title="Delete">
       <i class="bx bx-x"></i>
     </button>
   </div>
   <div class="title">
-    <i class="bx bx-run"></i>
+    <i [ngClass]="logo()"></i>
     <span>{{ session().title }}</span>
   </div>
   @for (exercise of session().exercises; track $index) {
@@ -16,8 +21,4 @@
     <span class="small">{{ exercise.lastPerformance }}</span>
   </div>
   }
-  <button type="button" class="view" title="Update" (click)="update()">
-    <i class="bx bxs-edit-alt"></i>
-    <span class="text">Update</span>
-  </button>
 </div>

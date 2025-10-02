@@ -6,12 +6,11 @@ import {
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { Component, Inject, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormsModule } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Exercise } from '../../../core/interfaces/exercise';
 import { Session } from '../../../core/interfaces/session';
 
@@ -22,7 +21,6 @@ import { Session } from '../../../core/interfaces/session';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule,
     CdkDropList,
     CdkDrag,
     CdkDragHandle,
@@ -32,7 +30,6 @@ import { Session } from '../../../core/interfaces/session';
 })
 export class SessionDialogComponent implements OnInit {
   session: Session = {} as Session;
-  fb = inject(FormBuilder);
 
   constructor(
     public dialogRef: MatDialogRef<SessionDialogComponent>,

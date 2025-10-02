@@ -103,6 +103,40 @@
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.program .update-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.program .update-container .update {
+  box-shadow: var(--box-shadow);
+  width: 40px;
+  height: 40px;
+  color: var(--accent);
+  background-color: var(--primary);
+  border-radius: var(--light-radius);
+  cursor: pointer;
+  transition: 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: var(--primary);
+}
+
+.program .update-container .update i {
+  font-size: 30px;
+}
+
+.program .update-container .update:hover {
+  color: var(--primary);
+  background-color: var(--accent);
+}
+
 .program .delete-container {
   display: flex;
   justify-content: center;
@@ -113,6 +147,7 @@
 }
 
 .program .delete-container .delete {
+  box-shadow: var(--box-shadow);
   width: 40px;
   height: 40px;
   color: red;

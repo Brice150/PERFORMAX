@@ -20,6 +20,7 @@ import { Session } from '../../core/interfaces/session';
 })
 export class SessionCardComponent {
   readonly session = input.required<Session>();
+  readonly logo = input.required<string>();
   @Output() updateSessionEvent = new EventEmitter<void>();
   @Output() deleteSessionEvent = new EventEmitter<void>();
 

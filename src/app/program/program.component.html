@@ -6,6 +6,7 @@
       @for (session of program.sessions; track $index; let index = $index) {
       <app-session-card
         [session]="session"
+        [logo]="program.logo"
         (updateSessionEvent)="updateSession(session, index)"
         (deleteSessionEvent)="deleteSession(index)"
       ></app-session-card>

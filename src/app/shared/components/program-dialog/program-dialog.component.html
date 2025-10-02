@@ -1,0 +1,27 @@
+<section mat-dialog-content>
+  <h1>Update Program</h1>
+  <form class="content">
+    <mat-form-field class="title">
+      <mat-label>PROGRAM NAME</mat-label>
+      <input
+        matInput
+        [(ngModel)]="program.title"
+        name="programTitle"
+        type="text"
+        minlength="2"
+        maxlength="50"
+        required
+      />
+    </mat-form-field>
+    <div class="button-container">
+      <button type="button" title="Cancel" (click)="cancel()" class="cancel">
+        <i class="bx bx-x"></i>
+        <span class="text">Cancel</span>
+      </button>
+      <button type="button" title="Confirm" (click)="confirm()">
+        <i class="bx bx-check"></i>
+        <span class="text">Confirm</span>
+      </button>
+    </div>
+  </form>
+</section>

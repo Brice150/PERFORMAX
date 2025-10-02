@@ -80,36 +80,38 @@
   font-weight: 500;
 }
 
-.view {
-  margin-top: 20px;
-  cursor: pointer;
-  background-color: var(--primary);
-  color: var(--accent);
-  padding: 10px;
+.session .update-container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 10px;
-  border-radius: var(--light-radius);
-  transition: 0.5s ease;
-  width: 150px;
-  border: none;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.session .update-container .update {
   box-shadow: var(--box-shadow);
+  width: 40px;
+  height: 40px;
+  color: var(--accent);
+  background-color: var(--primary);
+  border-radius: var(--light-radius);
+  cursor: pointer;
+  transition: 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: var(--primary);
 }
 
-.view:hover {
-  background-color: var(--accent);
-  color: var(--primary);
-}
-
-.view i {
+.session .update-container .update i {
   font-size: 30px;
 }
 
-.view .text {
-  font-size: 20px;
-  font-weight: 500;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+.session .update-container .update:hover {
+  color: var(--primary);
+  background-color: var(--accent);
 }
 
 .session .delete-container {
@@ -122,6 +124,7 @@
 }
 
 .session .delete-container .delete {
+  box-shadow: var(--box-shadow);
   width: 40px;
   height: 40px;
   color: red;
