@@ -45,6 +45,10 @@
   font-weight: 500;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   text-transform: capitalize;
+  max-width: 180px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .session .exercise {

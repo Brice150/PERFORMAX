@@ -27,6 +27,7 @@ section .title {
   align-items: center;
   gap: 10px;
   margin-bottom: 5px;
+  width: 95%;
 }
 
 section .title i {
@@ -35,6 +36,7 @@ section .title i {
 
 section .title h1 {
   text-transform: capitalize;
+  text-align: center;
 }
 
 section .content {

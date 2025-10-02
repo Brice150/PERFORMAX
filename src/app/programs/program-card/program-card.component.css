@@ -40,6 +40,10 @@
   font-weight: 500;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   text-transform: capitalize;
+  max-width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .program .session {
@@ -58,16 +62,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-.program .session span.small {
-  width: 50px;
-  text-align: center;
-  font-weight: 400;
-}
-
-.program .session span.large {
-  width: 150px;
+  width: 260px;
   text-align: center;
   font-weight: 500;
 }
