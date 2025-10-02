@@ -47,8 +47,6 @@ export class ProgramComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (program: Program | null) => {
           if (program) {
-            console.log(program);
-
             this.program = program;
           }
           this.loading = false;
