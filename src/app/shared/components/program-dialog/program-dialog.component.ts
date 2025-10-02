@@ -4,16 +4,25 @@ import { FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { logos } from '../../../../assets/data/logos';
 import { Program } from '../../../core/interfaces/program';
 
 @Component({
   selector: 'app-program-dialog',
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+  ],
   templateUrl: './program-dialog.component.html',
   styleUrl: './program-dialog.component.css',
 })
 export class ProgramDialogComponent implements OnInit {
   program: Program = {} as Program;
+  logos = logos;
 
   constructor(
     public dialogRef: MatDialogRef<ProgramDialogComponent>,
