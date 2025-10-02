@@ -1,0 +1,44 @@
+<section mat-dialog-content>
+  <h1>Update Program</h1>
+  <form class="content">
+    <mat-form-field>
+      <mat-select
+        [(ngModel)]="program.logo"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <mat-select-trigger>
+          <i [ngClass]="program.logo"></i>
+        </mat-select-trigger>
+
+        @for (logo of logos; track $index) {
+        <mat-option [value]="logo">
+          <i [ngClass]="logo"></i>
+        </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="title">
+      <mat-label>PROGRAM NAME</mat-label>
+      <input
+        matInput
+        [(ngModel)]="program.title"
+        [ngModelOptions]="{ standalone: true }"
+        name="programTitle"
+        type="text"
+        minlength="2"
+        maxlength="50"
+        required
+      />
+    </mat-form-field>
+    <div class="button-container">
+      <button type="button" title="Cancel" (click)="cancel()" class="cancel">
+        <i class="bx bx-x"></i>
+        <span class="text">Cancel</span>
+      </button>
+      <button type="button" title="Confirm" (click)="confirm()">
+        <i class="bx bx-check"></i>
+        <span class="text">Confirm</span>
+      </button>
+    </div>
+  </form>
+</section>

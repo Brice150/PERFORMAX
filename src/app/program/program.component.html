@@ -1,0 +1,31 @@
+<section>
+  <div class="title">
+    <i [ngClass]="program.logo"></i>
+    <h1>{{ program.title }}</h1>
+  </div>
+  @if (!loading) {
+  <div class="content">
+    <div class="sessions">
+      @for (session of program.sessions; track $index; let index = $index) {
+      <app-session-card
+        [session]="session"
+        [logo]="program.logo"
+        (updateSessionEvent)="updateSession(session, index)"
+        (deleteSessionEvent)="deleteSession(index)"
+      ></app-session-card>
+      }
+    </div>
+    <button
+      type="button"
+      (click)="addSession()"
+      class="add"
+      title="Add Session"
+    >
+      <i class="bx bx-plus"></i>
+    </button>
+  </div>
+  }
+</section>
+@if (loading) {
+<mat-spinner></mat-spinner>
+}

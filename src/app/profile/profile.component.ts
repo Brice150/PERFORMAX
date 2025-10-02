@@ -8,9 +8,9 @@ import { ToastrService } from 'ngx-toastr';
 import { catchError, filter, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { User } from '../core/interfaces/user';
 import { ProfileService } from '../core/services/profile.service';
+import { ProgramsService } from '../core/services/programs.service';
 import { ProgressService } from '../core/services/progress.service';
 import { UserService } from '../core/services/user.service';
-import { WorkoutsService } from '../core/services/workouts.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { SecurityDialogComponent } from '../shared/components/security-dialog/security-dialog.component';
 import { SecurityComponent } from './security/security.component';
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnDestroy {
   toastr = inject(ToastrService);
   profileService = inject(ProfileService);
   userService = inject(UserService);
-  workoutsService = inject(WorkoutsService);
+  programsService = inject(ProgramsService);
   progressService = inject(ProgressService);
   dialog = inject(MatDialog);
   router = inject(Router);
@@ -96,7 +96,7 @@ export class ProfileComponent implements OnDestroy {
         filter((res: boolean) => res),
         switchMap(() => {
           this.loading = true;
-          return this.workoutsService.deleteUserWorkouts();
+          return this.programsService.deleteUserPrograms();
         }),
         switchMap(() => this.progressService.deleteUserProgress()),
         switchMap(() =>

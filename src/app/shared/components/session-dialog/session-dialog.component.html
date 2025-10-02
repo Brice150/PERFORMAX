@@ -1,20 +1,20 @@
-<section>
+<section mat-dialog-content>
+  <h1>Update Session</h1>
   <form class="content">
     <mat-form-field class="title">
-      <mat-label>WORKOUT NAME</mat-label>
+      <mat-label>SESSION NAME</mat-label>
       <input
         matInput
-        [(ngModel)]="workout.title"
-        name="workoutTitle"
+        [(ngModel)]="session.title"
+        name="sessionTitle"
         type="text"
-        (ngModelChange)="toggleUpdateNeeded()"
         minlength="2"
         maxlength="50"
         required
       />
     </mat-form-field>
     <div class="exercises" cdkDropList (cdkDropListDropped)="drop($event)">
-      @for (exercise of workout.exercises; track $index; let index = $index) {
+      @for (exercise of session.exercises; track $index; let index = $index) {
       <div class="row" cdkDrag>
         <i class="bx bx-menu" cdkDragHandle></i>
         <mat-form-field>
@@ -24,7 +24,6 @@
             [(ngModel)]="exercise.title"
             [name]="'exerciseTitle' + index"
             type="text"
-            (ngModelChange)="toggleUpdateNeeded()"
             minlength="2"
             maxlength="50"
             required
@@ -37,7 +36,6 @@
             [(ngModel)]="exercise.repetitions"
             [name]="'repetitions' + index"
             type="text"
-            (ngModelChange)="toggleUpdateNeeded()"
             maxlength="20"
           />
         </mat-form-field>
@@ -48,7 +46,6 @@
             [(ngModel)]="exercise.lastPerformance"
             [name]="'lastPerformance' + index"
             type="text"
-            (ngModelChange)="toggleUpdateNeeded()"
             maxlength="20"
           />
         </mat-form-field>
@@ -64,7 +61,7 @@
       </div>
       }
     </div>
-    <div class="button-container">
+    <div class="button-container-plus">
       <button
         type="button"
         (click)="addExercise()"
@@ -73,27 +70,16 @@
       >
         <i class="bx bx-plus"></i>
       </button>
-      <button
-        type="button"
-        (click)="deleteWorkout()"
-        class="delete"
-        title="Delete Workout"
-      >
+    </div>
+    <div class="button-container">
+      <button type="button" title="Cancel" (click)="cancel()" class="cancel">
         <i class="bx bx-x"></i>
+        <span class="text">Cancel</span>
       </button>
-      @if(updateNeeded) {
-      <button
-        type="button"
-        (click)="updateWorkout()"
-        class="update"
-        title="Update Workout"
-      >
+      <button type="button" title="Confirm" (click)="confirm()">
         <i class="bx bx-check"></i>
+        <span class="text">Confirm</span>
       </button>
-      }
     </div>
   </form>
 </section>
-@if(loading) {
-<mat-spinner></mat-spinner>
-}

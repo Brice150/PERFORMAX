@@ -1,0 +1,27 @@
+<section>
+  <h1>Programs</h1>
+  @if (!loading) {
+  <div class="content">
+    <div class="programs">
+      @for (program of programs; track $index) {
+      <app-program-card
+        [program]="program"
+        (updateProgramEvent)="updateProgram(program)"
+        (deleteProgramEvent)="deleteProgram(program.id!)"
+      ></app-program-card>
+      }
+    </div>
+    <button
+      type="button"
+      (click)="addProgram()"
+      class="add"
+      title="Add Program"
+    >
+      <i class="bx bx-plus"></i>
+    </button>
+  </div>
+  }
+</section>
+@if (loading) {
+<mat-spinner></mat-spinner>
+}

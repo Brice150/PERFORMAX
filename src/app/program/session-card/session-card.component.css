@@ -1,0 +1,154 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+}
+
+.session {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+  padding: 10px;
+  width: 100%;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--light-radius);
+  color: var(--primary);
+  transition: 0.5s ease;
+  border: none;
+  background-color: var(--accent);
+}
+
+.session:hover {
+  background-color: var(--accent);
+  color: var(--primary);
+}
+
+.session .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.session .title i {
+  font-size: 30px;
+}
+
+.session .title span {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  text-transform: capitalize;
+  max-width: 180px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.session .exercise {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: var(--secondary);
+}
+
+.session .exercise i {
+  font-size: 20px;
+  padding: 5px 0;
+}
+
+.session .exercise span {
+  font-size: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.session .exercise span.small {
+  width: 50px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.session .exercise span.large {
+  width: 150px;
+  text-align: left;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.session .update-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.session .update-container .update {
+  box-shadow: var(--box-shadow);
+  width: 40px;
+  height: 40px;
+  color: var(--accent);
+  background-color: var(--primary);
+  border-radius: var(--light-radius);
+  cursor: pointer;
+  transition: 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: var(--primary);
+}
+
+.session .update-container .update i {
+  font-size: 30px;
+}
+
+.session .update-container .update:hover {
+  color: var(--primary);
+  background-color: var(--accent);
+}
+
+.session .delete-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.session .delete-container .delete {
+  box-shadow: var(--box-shadow);
+  width: 40px;
+  height: 40px;
+  color: red;
+  background-color: var(--primary);
+  border-radius: var(--light-radius);
+  cursor: pointer;
+  transition: 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: var(--primary);
+}
+
+.session .delete-container .delete i {
+  font-size: 50px;
+}
+
+.session .delete-container .delete:hover {
+  color: var(--primary);
+  background-color: red;
+}
