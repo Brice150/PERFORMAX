@@ -48,7 +48,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
     this.progress.measures = [];
     this.progressService
       .getProgress()
-      .pipe(take(1), takeUntil(this.destroyed$))
+      .pipe(takeUntil(this.destroyed$))
       .subscribe({
         next: (progress: Progress[]) => {
           if (progress[0]?.measures?.length >= 0) {
