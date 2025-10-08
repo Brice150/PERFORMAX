@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter, Subject, switchMap, takeUntil } from 'rxjs';
 import { Exercise } from '../core/interfaces/exercise';
@@ -11,17 +11,12 @@ import { Program } from '../core/interfaces/program';
 import { Session } from '../core/interfaces/session';
 import { ProgramsService } from '../core/services/programs.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
-import { SessionCardComponent } from './session-card/session-card.component';
 import { SessionDialogComponent } from '../shared/components/session-dialog/session-dialog.component';
+import { SessionCardComponent } from './session-card/session-card.component';
 
 @Component({
   selector: 'app-program',
-  imports: [
-    CommonModule,
-    MatProgressSpinnerModule,
-    SessionCardComponent,
-    RouterModule,
-  ],
+  imports: [CommonModule, MatProgressSpinnerModule, SessionCardComponent],
   templateUrl: './program.component.html',
   styleUrl: './program.component.css',
 })
