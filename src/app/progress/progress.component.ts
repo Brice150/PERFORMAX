@@ -2,34 +2,21 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
-import { FormsModule } from '@angular/forms';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import Chart from 'chart.js/auto';
 import { ToastrService } from 'ngx-toastr';
-import { filter, Subject, take, takeUntil } from 'rxjs';
+import { filter, Subject, switchMap, takeUntil } from 'rxjs';
 import { Measure } from '../core/interfaces/measure';
 import { Progress } from '../core/interfaces/progress';
 import { ProgressService } from '../core/services/progress.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
-import { DisableScrollDirective } from '../shared/directives/disable-scroll.directive';
+import { MeasureDialogComponent } from '../shared/components/measure-dialog/measure-dialog.component';
+import { MeasureCardComponent } from './measure-card/measure-card.component';
 
 @Component({
   selector: 'app-progress',
-  imports: [
-    CommonModule,
-    MatProgressSpinnerModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    DisableScrollDirective,
-  ],
-  providers: [provideNativeDateAdapter()],
+  imports: [CommonModule, MatProgressSpinnerModule, MeasureCardComponent],
   templateUrl: './progress.component.html',
   styleUrl: './progress.component.css',
 })
@@ -40,7 +27,6 @@ export class ProgressComponent implements OnInit, OnDestroy {
   progress: Progress = {} as Progress;
   toastr = inject(ToastrService);
   datePipe: DatePipe = new DatePipe('fr');
-  updateNeeded: boolean = false;
   graph?: Chart<'line', number[], string>;
   dialog = inject(MatDialog);
 
@@ -170,10 +156,6 @@ export class ProgressComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleUpdateNeeded(): void {
-    this.updateNeeded = true;
-  }
-
   addProgress(): void {
     this.loading = true;
 
@@ -192,39 +174,6 @@ export class ProgressComponent implements OnInit, OnDestroy {
     this.progress.measures.push(measure);
 
     this.saveUserProgress('added');
-  }
-
-  updateProgress(): void {
-    if (
-      !this.progress.measures.some(
-        (measure) =>
-          measure.weight < 0 ||
-          measure.fat < 0 ||
-          measure.muscle < 0 ||
-          measure.weight > 300 ||
-          measure.fat > 100 ||
-          measure.muscle > 100 ||
-          measure.fat + measure.muscle > 100
-      ) &&
-      this.progress.measures.every(
-        (measure) =>
-          measure.weight !== undefined &&
-          measure.weight !== null &&
-          measure.fat !== undefined &&
-          measure.fat !== null &&
-          measure.muscle !== undefined &&
-          measure.muscle !== null &&
-          measure.date !== undefined &&
-          measure.date !== null
-      )
-    ) {
-      this.saveUserProgress('updated');
-    } else {
-      this.toastr.info('Invalid measure', 'Progress', {
-        positionClass: 'toast-bottom-center',
-        toastClass: 'ngx-toastr custom error',
-      });
-    }
   }
 
   deleteMeasure(index: number) {
@@ -287,7 +236,6 @@ export class ProgressComponent implements OnInit, OnDestroy {
           next: () => {
             this.loading = false;
             this.updateGraph();
-            this.updateNeeded = false;
             this.toastr.info('Measure ' + toastrMessage, 'Progress', {
               positionClass: 'toast-bottom-center',
               toastClass: 'ngx-toastr custom info',
@@ -306,5 +254,42 @@ export class ProgressComponent implements OnInit, OnDestroy {
           },
         });
     }
+  }
+
+  updateProgress(measure: Measure, index: number): void {
+    const dialogRef = this.dialog.open(MeasureDialogComponent, {
+      data: structuredClone(measure),
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        filter((res) => !!res),
+        switchMap((res: Measure) => {
+          this.loading = true;
+          this.progress.measures[index] = res;
+          return this.progressService.updateProgress(this.progress);
+        }),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe({
+        next: () => {
+          this.loading = false;
+          this.updateGraph();
+          this.toastr.info('Measure updated', 'Progress', {
+            positionClass: 'toast-bottom-center',
+            toastClass: 'ngx-toastr custom info',
+          });
+        },
+        error: (error: HttpErrorResponse) => {
+          this.loading = false;
+          if (!error.message.includes('Missing or insufficient permissions.')) {
+            this.toastr.error(error.message, 'Progress', {
+              positionClass: 'toast-bottom-center',
+              toastClass: 'ngx-toastr custom error',
+            });
+          }
+        },
+      });
   }
 }

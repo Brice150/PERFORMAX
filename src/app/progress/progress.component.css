@@ -54,51 +54,13 @@ section h1 {
   transition: opacity 1s ease-in-out;
 }
 
-section form {
+section .content {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
-  box-shadow: var(--box-shadow);
-  border-radius: var(--light-radius);
-  padding: 0 10px;
-}
-
-section form .row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-section .delete-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-section form .delete {
-  width: 50px;
-  height: 50px;
-  color: red;
-  background-color: var(--primary);
-  border-radius: var(--light-radius);
-  cursor: pointer;
-  transition: 0.5s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  background-color: var(--primary);
-}
-
-section form .delete i {
-  font-size: 50px;
-}
-
-section form .delete:hover {
-  color: var(--primary);
-  background-color: red;
+  width: 100%;
+  gap: 10px;
 }
 
 section .button-container {
@@ -106,6 +68,7 @@ section .button-container {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
 section .add {
@@ -131,35 +94,9 @@ section .add:hover {
   background-color: var(--accent);
 }
 
-section .update {
-  cursor: pointer;
-  transition: 0.5s ease;
-  box-shadow: var(--box-shadow);
-  color: var(--secondary);
-  border-radius: var(--light-radius);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  border: none;
-  background-color: var(--primary);
-}
-
-section .update i {
-  font-size: 50px;
-}
-
-section .update:hover {
+section .button-container .add:hover {
+  background-color: var(--accent);
   color: var(--primary);
-  background-color: var(--secondary);
-}
-
-section form input {
-  color: var(--secondary);
-}
-
-section form mat-label {
-  color: var(--accent);
 }
 
 section .value-container {
@@ -208,70 +145,9 @@ mat-spinner {
   stroke: var(--accent) !important;
 }
 
-::ng-deep section form .mat-mdc-form-field-icon-suffix {
-  color: var(--accent);
-}
-
-::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: var(--primary) !important;
-}
-
-::ng-deep .mat-mdc-form-field-subscript-wrapper,
-.mat-mdc-form-field-bottom-align::before {
-  display: none;
-}
-
-::ng-deep
-  .mdc-text-field--filled:not(.mdc-text-field--disabled)
-  .mdc-line-ripple::before {
-  border-bottom-color: var(--accent) !important;
-}
-
-::ng-deep
-  .mdc-text-field--filled:not(.mdc-text-field--disabled)
-  .mdc-line-ripple::after {
-  border-bottom-color: var(--accent) !important;
-}
-
-::ng-deep .mat-mdc-icon-button {
-  color: var(--accent) !important;
-}
-
-::ng-deep .mat-calendar-body-selected {
-  background-color: var(--accent) !important;
-}
-
-::ng-deep
-  .mat-calendar-body-today:not(.mat-calendar-body-selected):not(
-    .mat-calendar-body-comparison-identical
-  ) {
-  border-color: var(--accent) !important;
-}
-
-::ng-deep .mat-datepicker-content {
-  background-color: var(--primary) !important;
-}
-
-::ng-deep .mat-calendar-body-selected.mat-calendar-body-today {
-  box-shadow: inset 0 0 0 1px var(--accent) !important;
-}
-
-::ng-deep mat-form-field.mat-form-field-invalid {
-  --secondary: red;
-  --accent: red;
-}
-
 @media screen and (max-width: 740px) {
   .graph {
     height: 400px;
-  }
-
-  section .delete-container {
-    width: 210px;
-  }
-
-  section form .row {
-    margin: 10px 0;
   }
 }
 

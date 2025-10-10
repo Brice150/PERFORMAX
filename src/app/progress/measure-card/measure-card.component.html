@@ -1,0 +1,42 @@
+<div class="measure">
+  <div class="update-container">
+    <button (click)="update()" class="update" title="Update">
+      <i class="bx bxs-edit-alt"></i>
+    </button>
+  </div>
+  <div class="delete-container">
+    <button (click)="delete()" class="delete" title="Delete">
+      <i class="bx bx-x"></i>
+    </button>
+  </div>
+  <div class="elements">
+    <div class="element">
+      <div class="label">
+        <i class="bx bx-body"></i>
+        <span>Weight :</span>
+      </div>
+      <span class="value">{{ measure().weight }} kg</span>
+    </div>
+    <div class="element">
+      <div class="label">
+        <i class="bx bx-layer"></i>
+        <span>Fat :</span>
+      </div>
+      <span class="value">{{ measure().fat }} %</span>
+    </div>
+    <div class="element">
+      <div class="label">
+        <i class="bx bx-dumbbell"></i>
+        <span>Muscle :</span>
+      </div>
+      <span class="value">{{ measure().muscle }} %</span>
+    </div>
+    <div class="element">
+      <div class="label">
+        <i class="bx bx-calendar"></i>
+        <span>Date :</span>
+      </div>
+      <span class="value">{{ measure().date | date : "dd/MM/yyyy" }}</span>
+    </div>
+  </div>
+</div>

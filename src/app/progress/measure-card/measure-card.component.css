@@ -3,82 +3,74 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 320px;
 }
 
-.session {
+.measure {
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
-  margin: 10px;
+  align-items: center;
   padding: 10px;
-  width: 100%;
+  width: 90%;
+  max-width: 900px;
   box-shadow: var(--box-shadow);
   border-radius: var(--light-radius);
   color: var(--primary);
   background-color: var(--accent);
 }
 
-.session .title {
+.measure .elements {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 10px;
+  margin: auto 50px;
 }
 
-.session .title i {
+.measure .elements .element {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 4px;
+  width: 180px;
+}
+
+.measure .label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.measure .label i {
   font-size: 30px;
 }
 
-.session .title span {
-  font-size: 20px;
+.measure .label span {
+  font-size: 18px;
   font-weight: 500;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   text-transform: capitalize;
-  max-width: 180px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: var(--primary);
 }
 
-.session .exercise {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+.measure .value {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  text-transform: capitalize;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   color: var(--secondary);
 }
 
-.session .exercise i {
-  font-size: 20px;
-  padding: 5px 0;
-}
-
-.session .exercise span {
-  font-size: 15px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-.session .exercise span.small {
-  width: 50px;
-  text-align: center;
-  font-weight: 400;
-}
-
-.session .exercise span.large {
-  width: 150px;
-  text-align: left;
-  font-weight: 500;
-  text-transform: capitalize;
-}
-
-.session .update-container {
+.measure .update-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +79,7 @@
   left: 5px;
 }
 
-.session .update-container .update {
+.measure .update-container .update {
   box-shadow: var(--box-shadow);
   width: 40px;
   height: 40px;
@@ -103,16 +95,16 @@
   background-color: var(--primary);
 }
 
-.session .update-container .update i {
+.measure .update-container .update i {
   font-size: 30px;
 }
 
-.session .update-container .update:hover {
+.measure .update-container .update:hover {
   color: var(--primary);
   background-color: var(--accent);
 }
 
-.session .delete-container {
+.measure .delete-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,7 +113,7 @@
   right: 5px;
 }
 
-.session .delete-container .delete {
+.measure .delete-container .delete {
   box-shadow: var(--box-shadow);
   width: 40px;
   height: 40px;
@@ -137,11 +129,11 @@
   background-color: var(--primary);
 }
 
-.session .delete-container .delete i {
+.measure .delete-container .delete i {
   font-size: 50px;
 }
 
-.session .delete-container .delete:hover {
+.measure .delete-container .delete:hover {
   color: var(--primary);
   background-color: red;
 }

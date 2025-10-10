@@ -1,0 +1,77 @@
+<section mat-dialog-content>
+  <h1>Update Progress</h1>
+  <form class="content">
+    <div class="progress">
+      <div class="row">
+        <mat-form-field>
+          <mat-label>WEIGHT</mat-label>
+          <input
+            appDisableScroll
+            matInput
+            [(ngModel)]="measure.weight"
+            name="weight"
+            type="number"
+            min="0"
+            max="1000000000"
+            required
+          />
+          <span matSuffix>kg</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>MUSCLE</mat-label>
+          <input
+            appDisableScroll
+            matInput
+            [(ngModel)]="measure.muscle"
+            name="muscle"
+            type="number"
+            min="0"
+            max="100"
+            required
+          />
+          <span matSuffix>%</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>FAT</mat-label>
+          <input
+            appDisableScroll
+            matInput
+            [(ngModel)]="measure.fat"
+            name="fat"
+            type="number"
+            min="0"
+            max="100"
+            required
+          />
+          <span matSuffix>%</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>DATE</mat-label>
+          <input
+            matInput
+            [(ngModel)]="measure.date"
+            [matDatepicker]="picker"
+            name="date"
+            required
+          />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="button-container">
+      <button type="button" title="Cancel" (click)="cancel()" class="cancel">
+        <i class="bx bx-x"></i>
+        <span class="text">Cancel</span>
+      </button>
+      <button type="button" title="Confirm" (click)="confirm()">
+        <i class="bx bx-check"></i>
+        <span class="text">Confirm</span>
+      </button>
+    </div>
+  </form>
+</section>

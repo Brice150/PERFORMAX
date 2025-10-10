@@ -18,83 +18,15 @@
     <div class="graph" [ngClass]="{ visible: progress.measures.length > 0 }">
       <canvas id="graph"></canvas>
     </div>
-    <form>
+    <div class="content">
       @for (measure of progress.measures; track $index; let index = $index) {
-      <div class="row">
-        <mat-form-field>
-          <mat-label>WEIGHT</mat-label>
-          <input
-            appDisableScroll
-            matInput
-            [(ngModel)]="measure.weight"
-            [name]="'weight' + index"
-            type="number"
-            (ngModelChange)="toggleUpdateNeeded()"
-            min="0"
-            max="1000000000"
-            required
-          />
-          <span matSuffix>kg</span>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>MUSCLE</mat-label>
-          <input
-            appDisableScroll
-            matInput
-            [(ngModel)]="measure.muscle"
-            [name]="'muscle' + index"
-            type="number"
-            (ngModelChange)="toggleUpdateNeeded()"
-            min="0"
-            max="100"
-            required
-          />
-          <span matSuffix>%</span>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>FAT</mat-label>
-          <input
-            appDisableScroll
-            matInput
-            [(ngModel)]="measure.fat"
-            [name]="'fat' + index"
-            type="number"
-            (ngModelChange)="toggleUpdateNeeded()"
-            min="0"
-            max="100"
-            required
-          />
-          <span matSuffix>%</span>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>DATE</mat-label>
-          <input
-            matInput
-            [(ngModel)]="measure.date"
-            [matDatepicker]="picker"
-            [name]="'date' + index"
-            (ngModelChange)="toggleUpdateNeeded()"
-            required
-          />
-          <mat-hint>DD/MM/YYYY</mat-hint>
-          <mat-datepicker-toggle
-            matIconSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <div class="delete-container">
-          <button
-            (click)="deleteMeasure(index)"
-            class="delete"
-            title="Delete Measure"
-          >
-            <i class="bx bx-x"></i>
-          </button>
-        </div>
-      </div>
+      <app-measure-card
+        [measure]="measure"
+        (updateSessionEvent)="updateProgress(measure, index)"
+        (deleteSessionEvent)="deleteMeasure(index)"
+      ></app-measure-card>
       }
-    </form>
+    </div>
     <div class="button-container">
       <button
         type="button"
@@ -104,16 +36,6 @@
       >
         <i class="bx bx-plus"></i>
       </button>
-      @if(updateNeeded) {
-      <button
-        type="button"
-        (click)="updateProgress()"
-        class="update"
-        title="Update Measures"
-      >
-        <i class="bx bx-check"></i>
-      </button>
-      }
     </div>
   </div>
 </section>
