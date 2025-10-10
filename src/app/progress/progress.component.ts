@@ -176,11 +176,18 @@ export class ProgressComponent implements OnInit, OnDestroy {
 
   addProgress(): void {
     this.loading = true;
+
+    let lastMeasure: Measure | undefined;
+
+    if (this.progress.measures.length > 0) {
+      lastMeasure = this.progress.measures[this.progress.measures.length - 1];
+    }
+
     const measure: Measure = {
       date: new Date(),
-      weight: 70,
-      fat: 20,
-      muscle: 73,
+      weight: lastMeasure?.weight ?? 70,
+      fat: lastMeasure?.fat ?? 20,
+      muscle: lastMeasure?.muscle ?? 73,
     };
     this.progress.measures.push(measure);
 
