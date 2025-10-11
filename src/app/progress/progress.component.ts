@@ -2,8 +2,12 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
+import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import Chart from 'chart.js/auto';
 import { ToastrService } from 'ngx-toastr';
 import { filter, Subject, switchMap, takeUntil } from 'rxjs';
@@ -16,7 +20,15 @@ import { MeasureCardComponent } from './measure-card/measure-card.component';
 
 @Component({
   selector: 'app-progress',
-  imports: [CommonModule, MatProgressSpinnerModule, MeasureCardComponent],
+  imports: [
+    CommonModule,
+    MatProgressSpinnerModule,
+    MeasureCardComponent,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+  ],
   templateUrl: './progress.component.html',
   styleUrl: './progress.component.css',
 })
@@ -29,6 +41,8 @@ export class ProgressComponent implements OnInit, OnDestroy {
   datePipe: DatePipe = new DatePipe('fr');
   graph?: Chart<'line', number[], string>;
   dialog = inject(MatDialog);
+  years: number[] = [];
+  year!: number;
 
   ngOnInit(): void {
     this.progress.measures = [];
@@ -51,6 +65,13 @@ export class ProgressComponent implements OnInit, OnDestroy {
               (a, b) => a.date.getTime() - b.date.getTime()
             );
           }
+
+          const yearsSet = new Set(
+            this.progress.measures.map((m) => m.date.getFullYear())
+          );
+          this.years = Array.from(yearsSet).sort((a, b) => b - a);
+          this.year = this.years[0];
+
           this.loading = false;
           this.displayGraph();
         },

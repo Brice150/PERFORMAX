@@ -155,6 +155,92 @@ mat-spinner {
   text-align: center;
 }
 
+.progress {
+  margin-top: 15px;
+}
+
+::ng-deep .mat-mdc-select-panel {
+  background-color: var(--primary) !important;
+}
+
+::ng-deep .progress .mat-mdc-select {
+  color: var(--accent) !important;
+}
+
+::ng-deep .progress .mat-mdc-select-arrow svg {
+  fill: var(--accent) !important;
+}
+
+::ng-deep
+  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(
+    .mat-mdc-option-multiple
+  ) {
+  background-color: var(--accent) !important;
+}
+
+::ng-deep
+  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(
+    .mat-mdc-option-multiple
+  )
+  .mdc-list-item__primary-text {
+  color: var(--primary) !important;
+}
+
+::ng-deep
+  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(
+    .mat-mdc-option-multiple
+  )
+  .mdc-list-item__primary-text
+  .flex
+  i {
+  color: var(--primary) !important;
+}
+
+::ng-deep
+  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(
+    .mat-mdc-option-multiple
+  )
+  .mdc-list-item__primary-text
+  .flex
+  .game {
+  color: var(--primary) !important;
+}
+
+::ng-deep .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after,
+.mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-indeterminate::after {
+  color: var(--primary) !important;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--primary) !important;
+}
+
+::ng-deep
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::before {
+  border-bottom-color: var(--accent) !important;
+}
+
+::ng-deep
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after {
+  border-bottom-color: var(--accent) !important;
+}
+
+::ng-deep .progress .mat-mdc-select-value {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+::ng-deep .progress .mat-mdc-text-field-wrapper {
+  width: 120px !important;
+}
+
+::ng-deep .progress .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
 @media screen and (max-width: 740px) {
   .graph {
     height: 400px;
