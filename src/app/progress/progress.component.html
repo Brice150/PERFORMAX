@@ -20,6 +20,12 @@
     </div>
     <div class="content">
       @for (measure of progress.measures; track $index; let index = $index) {
+      @if ( index === 0 || (progress.measures[index].date | date : 'MMMM yyyy')
+      !== (progress.measures[index - 1].date | date : 'MMMM yyyy') ) {
+      <span class="month">
+        {{ measure.date | date : "MMMM" : "" : "en" | titlecase }}
+      </span>
+      }
       <app-measure-card
         [measure]="measure"
         (updateSessionEvent)="updateProgress(measure, index)"

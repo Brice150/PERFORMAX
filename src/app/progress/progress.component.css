@@ -145,6 +145,16 @@ mat-spinner {
   stroke: var(--accent) !important;
 }
 
+.month {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent);
+  width: 90%;
+  max-width: 900px;
+  text-align: center;
+}
+
 @media screen and (max-width: 740px) {
   .graph {
     height: 400px;
