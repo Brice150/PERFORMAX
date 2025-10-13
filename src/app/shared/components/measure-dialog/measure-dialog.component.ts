@@ -27,16 +27,22 @@ import { DisableScrollDirective } from '../../directives/disable-scroll.directiv
 })
 export class MeasureDialogComponent implements OnInit {
   measure: Measure = {} as Measure;
+  mode: string = 'Add';
   toastr = inject(ToastrService);
 
   constructor(
     public dialogRef: MatDialogRef<MeasureDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Measure
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      measure: Measure;
+      mode: 'Update';
+    }
   ) {}
 
   ngOnInit(): void {
     if (this.data) {
-      this.measure = this.data;
+      this.measure = this.data.measure;
+      this.mode = this.data.mode;
     }
   }
 

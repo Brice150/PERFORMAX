@@ -43,6 +43,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
   dialog = inject(MatDialog);
   years: number[] = [];
   year!: number;
+  filteredMeasures: Measure[] = [];
 
   ngOnInit(): void {
     this.progress.measures = [];
@@ -69,7 +70,10 @@ export class ProgressComponent implements OnInit, OnDestroy {
               this.progress.measures.map((m) => m.date.getFullYear())
             );
             this.years = Array.from(yearsSet).sort((a, b) => b - a);
-            this.year = this.years[0];
+            if (!this.year) {
+              this.year = this.years[0];
+            }
+            this.filterMeasuresByYear();
           }
 
           this.loading = false;
@@ -92,27 +96,37 @@ export class ProgressComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
+  filterMeasuresByYear(onInit = true): void {
+    this.filteredMeasures = this.progress.measures.filter(
+      (m) => m.date.getFullYear() === this.year
+    );
+
+    if (!onInit) {
+      this.updateGraph();
+    }
+  }
+
   displayGraph(): void {
     const graph = document.getElementById('graph') as HTMLCanvasElement | null;
     if (graph) {
       this.graph = new Chart(graph, {
         type: 'line',
         data: {
-          labels: this.progress.measures.map(
+          labels: this.filteredMeasures.map(
             (measure) => this.datePipe.transform(measure.date, 'dd/MM/yyyy')!
           ),
           datasets: [
             {
               label: 'Weight (kg)',
-              data: this.progress.measures.map((measure) => measure.weight),
+              data: this.filteredMeasures.map((measure) => measure.weight),
             },
             {
               label: 'Muscle (%)',
-              data: this.progress.measures.map((measure) => measure.muscle),
+              data: this.filteredMeasures.map((measure) => measure.muscle),
             },
             {
               label: 'Fat (%)',
-              data: this.progress.measures.map((measure) => measure.fat),
+              data: this.filteredMeasures.map((measure) => measure.fat),
             },
           ],
         },
@@ -161,16 +175,16 @@ export class ProgressComponent implements OnInit, OnDestroy {
 
   updateGraph(): void {
     if (this.graph) {
-      this.graph.data.labels = this.progress.measures.map(
+      this.graph.data.labels = this.filteredMeasures.map(
         (measure) => this.datePipe.transform(measure.date, 'dd/MM/yyyy')!
       );
-      this.graph.data.datasets[0].data = this.progress.measures.map(
+      this.graph.data.datasets[0].data = this.filteredMeasures.map(
         (measure) => measure.weight
       );
-      this.graph.data.datasets[1].data = this.progress.measures.map(
+      this.graph.data.datasets[1].data = this.filteredMeasures.map(
         (measure) => measure.muscle
       );
-      this.graph.data.datasets[2].data = this.progress.measures.map(
+      this.graph.data.datasets[2].data = this.filteredMeasures.map(
         (measure) => measure.fat
       );
       this.graph.update();
@@ -178,8 +192,6 @@ export class ProgressComponent implements OnInit, OnDestroy {
   }
 
   addProgress(): void {
-    this.loading = true;
-
     let lastMeasure: Measure | undefined;
 
     if (this.progress.measures.length > 0) {
@@ -198,9 +210,45 @@ export class ProgressComponent implements OnInit, OnDestroy {
       fat: lastMeasure?.fat ?? 20,
       muscle: lastMeasure?.muscle ?? 73,
     };
-    this.progress.measures.push(measure);
 
-    this.saveUserProgress('added');
+    const dialogRef = this.dialog.open(MeasureDialogComponent, {
+      data: { measure: structuredClone(measure), mode: 'Add' },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        filter((res) => !!res),
+        switchMap((res: Measure) => {
+          this.loading = true;
+          this.progress.measures.push(res);
+          this.progress.measures.sort(
+            (a, b) => a.date.getTime() - b.date.getTime()
+          );
+          this.year = res.date.getFullYear();
+          return this.progressService.updateProgress(this.progress);
+        }),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe({
+        next: () => {
+          this.loading = false;
+          this.updateGraph();
+          this.toastr.info('Measure updated', 'Progress', {
+            positionClass: 'toast-bottom-center',
+            toastClass: 'ngx-toastr custom info',
+          });
+        },
+        error: (error: HttpErrorResponse) => {
+          this.loading = false;
+          if (!error.message.includes('Missing or insufficient permissions.')) {
+            this.toastr.error(error.message, 'Progress', {
+              positionClass: 'toast-bottom-center',
+              toastClass: 'ngx-toastr custom error',
+            });
+          }
+        },
+      });
   }
 
   deleteMeasure(measureId: number) {
@@ -290,7 +338,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
 
   updateProgress(measure: Measure): void {
     const dialogRef = this.dialog.open(MeasureDialogComponent, {
-      data: structuredClone(measure),
+      data: { measure: structuredClone(measure), mode: 'Update' },
     });
 
     dialogRef
