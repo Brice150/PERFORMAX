@@ -64,13 +64,13 @@ export class ProgressComponent implements OnInit, OnDestroy {
             this.progress.measures.sort(
               (a, b) => a.date.getTime() - b.date.getTime()
             );
-          }
 
-          const yearsSet = new Set(
-            this.progress.measures.map((m) => m.date.getFullYear())
-          );
-          this.years = Array.from(yearsSet).sort((a, b) => b - a);
-          this.year = this.years[0];
+            const yearsSet = new Set(
+              this.progress.measures.map((m) => m.date.getFullYear())
+            );
+            this.years = Array.from(yearsSet).sort((a, b) => b - a);
+            this.year = this.years[0];
+          }
 
           this.loading = false;
           this.displayGraph();
@@ -187,6 +187,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
     }
 
     const measure: Measure = {
+      id: this.progress.measures.length,
       date: new Date(),
       weight: lastMeasure?.weight ?? 70,
       fat: lastMeasure?.fat ?? 20,
@@ -197,7 +198,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
     this.saveUserProgress('added');
   }
 
-  deleteMeasure(index: number) {
+  deleteMeasure(measureId: number) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: 'delete this measure',
     });
@@ -207,8 +208,13 @@ export class ProgressComponent implements OnInit, OnDestroy {
       .pipe(filter((res: boolean) => res))
       .subscribe({
         next: () => {
-          this.progress.measures.splice(index, 1);
-          this.saveUserProgress('deleted');
+          const index = this.progress.measures.findIndex(
+            (m) => m.id === measureId
+          );
+          if (index !== -1) {
+            this.progress.measures.splice(index, 1);
+            this.saveUserProgress('deleted');
+          }
         },
         error: (error: HttpErrorResponse) => {
           if (!error.message.includes('Missing or insufficient permissions.')) {
@@ -277,7 +283,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateProgress(measure: Measure, index: number): void {
+  updateProgress(measure: Measure): void {
     const dialogRef = this.dialog.open(MeasureDialogComponent, {
       data: structuredClone(measure),
     });
@@ -288,7 +294,12 @@ export class ProgressComponent implements OnInit, OnDestroy {
         filter((res) => !!res),
         switchMap((res: Measure) => {
           this.loading = true;
-          this.progress.measures[index] = res;
+          const index = this.progress.measures.findIndex(
+            (m) => m.id === res.id
+          );
+          if (index !== -1) {
+            this.progress.measures[index] = res;
+          }
           return this.progressService.updateProgress(this.progress);
         }),
         takeUntil(this.destroyed$)

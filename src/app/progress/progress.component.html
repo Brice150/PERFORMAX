@@ -37,8 +37,8 @@
       }
       <app-measure-card
         [measure]="measure"
-        (updateSessionEvent)="updateProgress(measure, index)"
-        (deleteSessionEvent)="deleteMeasure(index)"
+        (updateSessionEvent)="updateProgress(measure)"
+        (deleteSessionEvent)="deleteMeasure(measure.id)"
       ></app-measure-card>
       }
     </div>
