@@ -186,8 +186,13 @@ export class ProgressComponent implements OnInit, OnDestroy {
       lastMeasure = this.progress.measures[this.progress.measures.length - 1];
     }
 
+    const maxId =
+      this.progress.measures.length > 0
+        ? Math.max(...this.progress.measures.map((m) => m.id))
+        : 0;
+
     const measure: Measure = {
-      id: this.progress.measures.length,
+      id: maxId + 1,
       date: new Date(),
       weight: lastMeasure?.weight ?? 70,
       fat: lastMeasure?.fat ?? 20,
