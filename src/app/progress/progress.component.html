@@ -19,6 +19,7 @@
         [(ngModel)]="year"
         (selectionChange)="filterMeasuresByYear(false)"
       >
+        <mat-option [value]="'all'">All</mat-option>
         @for (year of years; track $index) {
         <mat-option [value]="year">
           {{ year }}

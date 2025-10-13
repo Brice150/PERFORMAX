@@ -42,7 +42,7 @@ export class ProgressComponent implements OnInit, OnDestroy {
   graph?: Chart<'line', number[], string>;
   dialog = inject(MatDialog);
   years: number[] = [];
-  year!: number;
+  year: number | 'all' = 'all';
   filteredMeasures: Measure[] = [];
 
   ngOnInit(): void {
@@ -97,9 +97,13 @@ export class ProgressComponent implements OnInit, OnDestroy {
   }
 
   filterMeasuresByYear(onInit = true): void {
-    this.filteredMeasures = this.progress.measures.filter(
-      (m) => m.date.getFullYear() === this.year
-    );
+    if (this.year === 'all') {
+      this.filteredMeasures = [...this.progress.measures];
+    } else {
+      this.filteredMeasures = this.progress.measures.filter(
+        (m) => m.date.getFullYear() === this.year
+      );
+    }
 
     if (!onInit) {
       this.updateGraph();
@@ -225,7 +229,9 @@ export class ProgressComponent implements OnInit, OnDestroy {
           this.progress.measures.sort(
             (a, b) => a.date.getTime() - b.date.getTime()
           );
-          this.year = res.date.getFullYear();
+          if (this.year !== 'all') {
+            this.year = res.date.getFullYear();
+          }
           return this.progressService.updateProgress(this.progress);
         }),
         takeUntil(this.destroyed$)
