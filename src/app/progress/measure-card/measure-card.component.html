@@ -15,21 +15,25 @@
         <i class="bx bx-body"></i>
         <span>Weight :</span>
       </div>
-      <span class="value">{{ measure().weight }} kg</span>
+      <span class="value"
+        >{{ measure().weight.toLocaleString("fr-FR") }} kg</span
+      >
     </div>
     <div class="element">
       <div class="label">
         <i class="bx bx-dumbbell"></i>
         <span>Muscle :</span>
       </div>
-      <span class="value">{{ measure().muscle }} %</span>
+      <span class="value"
+        >{{ measure().muscle.toLocaleString("fr-FR") }} %</span
+      >
     </div>
     <div class="element">
       <div class="label">
         <i class="bx bx-layer"></i>
         <span>Fat :</span>
       </div>
-      <span class="value">{{ measure().fat }} %</span>
+      <span class="value">{{ measure().fat.toLocaleString("fr-FR") }} %</span>
     </div>
     <div class="element">
       <div class="label">

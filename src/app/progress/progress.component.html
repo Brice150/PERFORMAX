@@ -8,8 +8,15 @@
         <span>Last :</span>
       </div>
       <span class="number">
-        {{ progress.measures[progress.measures.length - 1].weight }} kg ({{
-          progress.measures[progress.measures.length - 1].fat
+        {{
+          progress.measures[progress.measures.length - 1].weight.toLocaleString(
+            "fr-FR"
+          )
+        }}
+        kg ({{
+          progress.measures[progress.measures.length - 1].fat.toLocaleString(
+            "fr-FR"
+          )
         }}
         % Fat)
       </span>
