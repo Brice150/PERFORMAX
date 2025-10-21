@@ -147,6 +147,22 @@ export class ProgressComponent implements OnInit, OnDestroy {
                 },
               },
             },
+            tooltip: {
+              callbacks: {
+                label: (tooltipItem: any) => {
+                  let currentValue = (
+                    Math.round(tooltipItem.raw * 10) / 10
+                  ).toLocaleString('fr-FR', {
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 1,
+                  });
+
+                  const unit = tooltipItem.datasetIndex === 0 ? 'kg' : '%';
+
+                  return `${currentValue} ${unit}`;
+                },
+              },
+            },
           },
           scales: {
             x: {
