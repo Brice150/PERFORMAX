@@ -1,6 +1,6 @@
 <section mat-dialog-content>
   <h1>Update Session</h1>
-  <form class="content">
+  <form class="content" (ngSubmit)="confirm()">
     <mat-form-field class="title">
       <mat-label>SESSION NAME</mat-label>
       <input
@@ -54,6 +54,7 @@
             (click)="deleteExercise(index)"
             class="delete"
             title="Delete Exercise"
+            type="button"
           >
             <i class="bx bx-x"></i>
           </button>
@@ -76,7 +77,7 @@
         <i class="bx bx-x"></i>
         <span class="text">Cancel</span>
       </button>
-      <button type="button" title="Confirm" (click)="confirm()">
+      <button type="submit" title="Confirm">
         <i class="bx bx-check"></i>
         <span class="text">Confirm</span>
       </button>

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, inject, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { ToastrService } from 'ngx-toastr';
 import { logos } from '../../../../assets/data/logos';
 import { Program } from '../../../core/interfaces/program';
 
@@ -23,6 +24,7 @@ import { Program } from '../../../core/interfaces/program';
 export class ProgramDialogComponent implements OnInit {
   program: Program = {} as Program;
   logos = logos;
+  toastr = inject(ToastrService);
 
   constructor(
     public dialogRef: MatDialogRef<ProgramDialogComponent>,
@@ -40,6 +42,13 @@ export class ProgramDialogComponent implements OnInit {
   }
 
   confirm(): void {
-    this.dialogRef.close(this.program);
+    if (this.program.title && this.program.logo) {
+      this.dialogRef.close(this.program);
+    } else {
+      this.toastr.info('Invalid program', 'Program', {
+        positionClass: 'toast-bottom-center',
+        toastClass: 'ngx-toastr custom error',
+      });
+    }
   }
 }

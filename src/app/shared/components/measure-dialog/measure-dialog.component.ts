@@ -8,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ToastrService } from 'ngx-toastr';
 import { Measure } from '../../../core/interfaces/measure';
-import { Progress } from '../../../core/interfaces/progress';
 import { DisableScrollDirective } from '../../directives/disable-scroll.directive';
 
 @Component({
@@ -61,14 +60,10 @@ export class MeasureDialogComponent implements OnInit {
         this.measure.muscle > 100 ||
         this.measure.fat + this.measure.muscle > 100
       ) &&
-      this.measure.weight !== undefined &&
-      this.measure.weight !== null &&
-      this.measure.fat !== undefined &&
-      this.measure.fat !== null &&
-      this.measure.muscle !== undefined &&
-      this.measure.muscle !== null &&
-      this.measure.date !== undefined &&
-      this.measure.date !== null
+      this.measure.weight != null &&
+      this.measure.fat != null &&
+      this.measure.muscle != null &&
+      this.measure.date != null
     ) {
       this.dialogRef.close(this.measure);
     } else {
