@@ -237,38 +237,20 @@ export class ProgressComponent implements OnInit, OnDestroy {
 
     dialogRef
       .afterClosed()
-      .pipe(
-        filter((res) => !!res),
-        switchMap((res: Measure) => {
+      .pipe(filter((res) => !!res))
+      .subscribe({
+        next: (res: Measure) => {
           this.loading = true;
           this.progress.measures.push(res);
           this.progress.measures.sort(
             (a, b) => a.date.getTime() - b.date.getTime()
           );
+
           if (this.year !== 'all') {
             this.year = res.date.getFullYear();
           }
-          return this.progressService.updateProgress(this.progress);
-        }),
-        takeUntil(this.destroyed$)
-      )
-      .subscribe({
-        next: () => {
-          this.loading = false;
-          this.updateGraph();
-          this.toastr.info('Measure updated', 'Progress', {
-            positionClass: 'toast-bottom-center',
-            toastClass: 'ngx-toastr custom info',
-          });
-        },
-        error: (error: HttpErrorResponse) => {
-          this.loading = false;
-          if (!error.message.includes('Missing or insufficient permissions.')) {
-            this.toastr.error(error.message, 'Progress', {
-              positionClass: 'toast-bottom-center',
-              toastClass: 'ngx-toastr custom error',
-            });
-          }
+
+          this.saveUserProgress('added');
         },
       });
   }
