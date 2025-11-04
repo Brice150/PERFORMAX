@@ -61,6 +61,7 @@ section .content {
   flex-direction: column;
   width: 100%;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
 section .button-container {
@@ -68,7 +69,6 @@ section .button-container {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  margin-bottom: 20px;
 }
 
 section .add {

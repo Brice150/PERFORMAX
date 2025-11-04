@@ -38,6 +38,16 @@
     <div class="graph" [ngClass]="{ visible: filteredMeasures.length > 0 }">
       <canvas id="graph"></canvas>
     </div>
+    <div class="button-container">
+      <button
+        type="button"
+        (click)="addProgress()"
+        class="add"
+        title="Add Measure"
+      >
+        <i class="bx bx-plus"></i>
+      </button>
+    </div>
     <div class="content">
       @for (measure of filteredMeasures; track $index; let index = $index) { @if
       ( index === 0 || (filteredMeasures[index].date | date : 'MMMM yyyy') !==
@@ -52,16 +62,6 @@
         (deleteSessionEvent)="deleteMeasure(measure.id)"
       ></app-measure-card>
       }
-    </div>
-    <div class="button-container">
-      <button
-        type="button"
-        (click)="addProgress()"
-        class="add"
-        title="Add Measure"
-      >
-        <i class="bx bx-plus"></i>
-      </button>
     </div>
   </div>
 </section>
