@@ -175,6 +175,15 @@ export class ProgressComponent implements OnInit, OnDestroy {
                 },
                 color: '#38a95a',
               },
+              ticks: {
+                color: 'black',
+              },
+              grid: {
+                color: 'transparent',
+              },
+              border: {
+                color: 'black',
+              },
             },
             y: {
               title: {
@@ -185,6 +194,12 @@ export class ProgressComponent implements OnInit, OnDestroy {
                   weight: 800,
                 },
                 color: '#38a95a',
+              },
+              grid: {
+                color: 'black',
+              },
+              border: {
+                color: 'black',
               },
             },
           },
